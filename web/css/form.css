@@ -1,0 +1,55 @@
+﻿#form-container
+{
+	background-color: #ddd;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	min-height: 100px;
+	padding: 10px;
+	padding-bottom: 3em;
+	text-align: center;
+}
+
+.cpr-form-field
+{
+	background-color: #fff;
+	border: 2px dashed #ccc;
+	border-radius: 5px;
+	min-height: 100px;
+	padding: 25px;
+}
+
+#add-field
+{
+	position : absolute;
+	bottom: 5px;
+}
+
+.fieldType
+{
+	
+}
+
+.form-hidden
+{
+	padding-left : 20px;
+}
+.cpr-option
+{
+	padding-top : 10px;
+	position : relative;
+}
+.cpr-option .btn
+{
+	position : absolute;
+	bottom : 0;
+}
+
+.field-condition-group
+{
+	padding-left: 20px;
+}
+
+.field-condition
+{
+	padding-left: 20px;
+}

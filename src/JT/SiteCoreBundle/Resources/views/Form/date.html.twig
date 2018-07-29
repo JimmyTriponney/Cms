@@ -1,0 +1,19 @@
+{% set name = field.slug %}
+{% set label = field.name %}
+{% set value = field.fieldValue %}
+{% set class = field.htmlClass %}
+{% set id = field.htmlId %}
+{% set required = field.fieldRequired ? 'required' : '' %}
+{% set type = field.fieldType.type %}
+{% set format = field.fieldFormat %}
+
+
+<input type="{{ type }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" {{ required }} placeholder="{{ label }}" class="form-control {{ class }}"/>
+<span class="ast"></span>
+
+
+
+
+
+
+

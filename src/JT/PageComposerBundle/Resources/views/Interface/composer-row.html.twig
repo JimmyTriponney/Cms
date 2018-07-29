@@ -1,0 +1,37 @@
+{# Search row #}
+{% for row in form.row %}
+	{#row.vars.value.pageOrder == counter#}
+	{% if row.vars.value.pageOrder == i %}
+		{% set counter = counter+1 %}
+		<div class="col-12 cpr-row bg-grey-1 p-2 mb-2">
+											
+			{# Action menu for row #}
+			<div class="nav-action-left">
+				<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+				<div class="btn-group panel-action">
+					<div class="btn btn-secondary"><span class="fa fa-arrows action"></span></div>
+					<div class="btn btn-secondary cut-row"><span class="fa fa-th-large action"></span></div>
+					<div class="btn btn-secondary edit"><span class="fa fa-pencil action"></span></div>
+					<div class="btn btn-secondary remove"><span class="fa fa-trash action"></span></div>
+				</div>
+			</div>
+			
+			{{ include('JTPageComposerBundle:Interface:composer-column.html.twig') }}
+									
+			<div class="row">
+				<div class="col-12">
+					<div class="form-row hidden">
+						{# Form of this row #}
+						{{ form_widget(row) }}
+						{# widget for prototype #}
+						<div id="{{row.column.vars.id}}" data-prototype="{{ form_widget(row.column.vars.prototype)|e }}" class="hidden"></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+		
+		
+	{% endif %}
+{% endfor %}

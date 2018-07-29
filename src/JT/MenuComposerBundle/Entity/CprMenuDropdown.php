@@ -1,0 +1,272 @@
+<?php
+
+namespace JT\MenuComposerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CprMenuDropdown
+ *
+ * @ORM\Table(name="cpr_menu_dropdown")
+ * @ORM\Entity(repositoryClass="JT\MenuComposerBundle\Repository\CprMenuDropdownRepository")
+ */
+class CprMenuDropdown
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255, nullable=true)
+     */
+    private $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     */
+    private $link;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="\JT\PageComposerBundle\Entity\CprPage", inversedBy="menuDropdown")
+     */
+    private $page;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="icon", type="string", length=50, nullable=true)
+     */
+    private $icon;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="JT\FileBundle\Entity\File")
+     */
+    private $img;
+	
+	/**
+	* @var Entity
+	*
+	* @ORM\ManyToMany(targetEntity="CprMenuSubDropdown" , cascade={"persist", "remove"}, orphanRemoval=true)
+	*/
+	private $subDropdown;	
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     *
+     * @return CprMenuDropdown
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     *
+     * @return CprMenuDropdown
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set page
+     *
+     * @param string $page
+     *
+     * @return CprMenuDropdown
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return string
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     *
+     * @return CprMenuDropdown
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Set desription
+     *
+     * @param string $desription
+     *
+     * @return CprMenuDropdown
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get desription
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    
+    
+
+    /**
+     * Add subDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuSubDropdown $subDropdown
+     *
+     * @return CprMenuDropdown
+     */
+    public function addSubDropdown(\JT\MenuComposerBundle\Entity\CprMenuSubDropdown $subDropdown)
+    {
+        $this->subDropdown[] = $subDropdown;
+
+        return $this;
+    }
+
+    /**
+     * Remove subDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuSubDropdown $subDropdown
+     */
+    public function removeSubDropdown(\JT\MenuComposerBundle\Entity\CprMenuSubDropdown $subDropdown)
+    {
+        $this->subDropdown->removeElement($subDropdown);
+    }
+
+    /**
+     * Get subDropdown
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubDropdown()
+    {
+        return $this->subDropdown;
+    }
+	
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subDropdown = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set img
+     *
+     * @param \JT\FileBundle\Entity\File $img
+     *
+     * @return CprMenuDropdown
+     */
+    public function setImg(\JT\FileBundle\Entity\File $img = null)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return \JT\FileBundle\Entity\File
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+}

@@ -1,0 +1,151 @@
+{% extends "JTPageComposerBundle::layout.html.twig" %}
+
+{% block title%}
+	Création de page - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+	
+	<div class="row">
+	
+		<div class="col-12 py-5">
+		
+			<h1 class="mt-5">Laissez libre court à votre imagination.</h1>
+			<h2>Création de page</h2>
+			
+			{{ form_start(form) }}
+					
+				<div class="row">
+					<div class="col-12" id="cpr-errors">				
+					</div>
+				</div>
+				
+				<!-- Auto tag -->
+				{{ form_widget(form.tagAuto, {'attr' : {'class':'hidden'} } ) }}
+				<!-- Keyword -->
+				{{ form_widget(form.keyword, {'attr' : {'class':'hidden'} } ) }}
+				<!-- description -->
+				{{ form_widget(form.description, {'attr' : {'class':'hidden'} } ) }}
+				<!-- Count element -->
+				{{ form_widget(form.countElem, {'attr' : {'class':'hidden'} } ) }}
+				<!-- New row -->
+				<div id="{{form.row.vars.id}}" data-prototype="{{ form_widget(form.row.vars.prototype)|e }}" class="hidden"></div>
+				
+				
+				
+				<!-- Submit -->
+				<div class="row page-menu text-center">
+						<div class="col-6 col-md-6">
+							<div class="row d-flex flex-row-reverse">
+								<div class="col-12 col-md-6">
+									<label class="checkbox-inline col-10 col-md-8">
+										{{ form_widget(form.published, {'attr' : {'data-toggle' : 'toggle', 'class' : ''}, 'id' : 'toggleCheck'} ) }}
+									</label>
+								</div>
+								<div class="col-12 p-1 col-md-6">
+									<button id="show-seo" class="btn btn-secondary col-8 col-md-8">SEO</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-6 col-md-6">
+							<div class="row text-center">
+								<div class="col-12 col-md-6 p-1">
+									<button id="preview" class="btn btn-primary col-10 col-md-8">Prévisualier</button>
+								</div>
+								<div class="col-12 col-md-6 p-1">
+									{{ form_widget(form.Enregistrer, {'attr' : {'class':'btn btn-success col-10 col-md-8'} } ) }}
+								</div>
+							</div>						
+						</div>
+				</div>
+				
+				<!-- Page title -->
+				<div class="row">
+					<div class="col-12 form-group">
+						{{ form_label(form.title, 'Titre de la page') }}
+						{{ form_widget(form.title, {'attr' : {'class':'form-control'} } ) }}
+					</div>
+				</div>
+				
+				<!-- Page tag -->
+				<div class="row">
+					<div class="col-12 form-group">
+						{{ form_label(form.tag, 'Tag de recherche') }}
+						{{ form_widget(form.tag, {'attr' : {'class':'form-control'} } ) }}
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="workspace col-12 p-2 pb-5">
+						<!-- Adding a new row in a composer -->
+						<div class="action-workspace text-center">
+							<div class="btn btn-secondary add-row"><span class="fa fa-plus-circle action"></span></div>
+						</div>
+								
+						{% set countElem = form.vars.value.countElem %}
+						{% set i = 0 %}
+						
+						{% for i in i..countElem %}
+						
+							{{ include('JTPageComposerBundle:composer:tst-row.html.twig',{'from':'base'}) }}
+							
+						{% endfor %}
+						
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-12 hidden">
+						{{ include('JTPageComposerBundle:composer:panelseo.html.twig') }}
+					</div>
+				</div>
+				
+			{{ form_end(form,{'render_rest': true}) }}
+		</div>
+
+	</div>
+	
+	<div class="hidden">
+		{{ include('JTPageComposerBundle:composer:paneloption.html.twig') }}
+		{{ include('JTPageComposerBundle:composer:panelblock.html.twig') }}
+	</div>
+	
+{% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	
+	<script>
+		var pathLibrary = '{{ path('jt_file_panel') }}';
+	</script>
+	
+	<!-- On sent form JS -->
+	<script src="{{ asset('js/pageComposer-on-sent.js') }}"></script>
+	<!-- TinyMCE JS -->
+	<script src="{{ asset('js/pageComposer-tinymce.js') }}"></script>
+
+	<!-- PageComposer JS -->
+	<!-- Action -->
+	<script src="{{ asset('js/pageComposer-remove.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-row-adjust.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block-add.js') }}"></script>
+
+	<script src="{{ asset('js/pageComposer-row.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-column.js') }}"></script>
+	
+	<!-- Edit JS -->
+	<script src="{{ asset('js/pageComposer-edit.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-add-img.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-reset.js') }}"></script>
+	
+	<!-- Initialization for update JS -->
+	<script src="{{ asset('js/pageComposer-init-update.js') }}"></script>
+	
+	<!-- SEO JS -->
+	<script src="{{ asset('js/pageComposer-check-tag.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-info.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-title.js') }}"></script>
+{% endblock %}
+

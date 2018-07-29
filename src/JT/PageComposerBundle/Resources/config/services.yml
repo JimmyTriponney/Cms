@@ -1,0 +1,4 @@
+services:
+#    jt_page_composer.example:
+#        class: JT\PageComposerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

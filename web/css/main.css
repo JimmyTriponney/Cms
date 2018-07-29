@@ -1,0 +1,107 @@
+﻿/* General */
+html,
+body,
+body > .container-fluid,
+body > .container-fluid > .row,
+#back-menu
+{
+	min-height : 100%;
+}
+
+
+
+
+
+/*****************
+	CSS onModal
+*****************/
+.onModal
+{
+	width : 100%;
+	position : absolute;
+	top : 20px;
+	left : 0;
+	z-index : 10000;
+	background-color : #fff;
+}
+/*****************
+	END CSS onModal
+*****************/
+
+
+
+
+/*
+*
+*
+*	CSS for page composer
+*
+*
+*/
+*
+{
+	box-sizing: border-box;
+}
+
+/*
+*	Page menu
+*/
+.page-menu
+{
+	position : fixed;
+	top : 0;
+	left: 15px;
+	z-index: 50;
+	width : 100%;
+	padding : 10px;
+	padding-left : 100px;
+	border : 0 #eee solid;
+	border-width : 0 0 1px 0;
+	background-color : #eef;
+}
+
+/*
+*	Action button
+*/
+.action:hover,
+.action:hover>[class*=btn]
+{
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	
+	transition: text-shadow 0.3s;
+}
+.action:active,
+.action:active>[class*=btn]
+{
+	text-shadow: 0 0 rgba(0,0,0,0);
+	
+	transition: text-shadow 0.1s;
+}
+
+/*
+*	add Bootstrap
+*/
+[class*=btn],
+.action
+{
+	cursor: pointer;
+}
+
+.hidden
+{
+	display: none;
+}
+
+/******
+*
+*	Modal-on
+*
+********/
+#modal-on
+{
+	z-index : 5000;
+}
+#modal-on-body
+{
+	padding : 20px;
+}

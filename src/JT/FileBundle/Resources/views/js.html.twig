@@ -1,0 +1,44 @@
+<!-- Library JS -->
+<script src="{{ asset('js/file-lib-modif.js') }}"></script>
+<script src="{{ asset('js/file-lib-modif-valid.js') }}"></script>
+
+
+<!-- Plupload JS -->
+<script src="{{ asset('vendor/plupload/plupload.full.min.js') }}"></script>
+
+
+<!-- File JS -->
+<script src="{{ asset('js/file-new.js') }}"></script>
+<script>
+
+	initNav();
+	
+	var uploader = new plupload.Uploader({
+		runtimes : 'html5,flash',
+		containes : $upContainer,
+		browse_button : $upBrowseButton,
+		drop_element : $upDrop,
+		chunk_size : '1mb',
+		max_retries : 3,
+		url : '{{ path('jt_file_load') }}',
+		flash_swf_url : '{{ asset('vendor/plupload/moxie.swf') }}',
+		multipart : true,
+		urlstream_upload : true,
+		multipart_params : {
+			directory : directory
+		},
+		filters : [
+			{title : 'Images', extensions : 'jpg,gif,png,svg'},
+			{title : 'Work' , extensions : 'psd'},
+			{title : 'Movie' , extensions : 'avi,mp4'}
+		]
+	});
+	
+	uploader.init();
+	
+</script>
+<script src="{{ asset('js/file-add.js') }}"></script>
+<script src="{{ asset('js/file-progress.js') }}"></script>
+<script src="{{ asset('js/file-drop.js') }}"></script>
+<script src="{{ asset('js/file-error.js') }}"></script>
+<script src="{{ asset('js/file-uploaded.js') }}"></script>

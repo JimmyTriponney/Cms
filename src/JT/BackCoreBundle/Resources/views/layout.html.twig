@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	JiTi - Back office
+{% endblock %}
+		
+{% block body %}
+
+	{{ include('JTBackCoreBundle:menu:menu.html.twig')}}
+		
+	<div class="m-auto col-md-10 p-5">
+		{% block page %}{% endblock %}
+	</div>
+	
+{% endblock %}
+
+{% block stylesheet %}
+	<!-- PageComposer CSS -->
+	<link rel="stylesheet" href="{{ asset('css/pageComposer.css') }}"/>
+	<!-- File CSS -->
+	<link rel="stylesheet" href="{{ asset('css/file.css') }}"/>
+	<!-- Livrary CSS -->
+	<link rel="stylesheet" href="{{ asset('css/library.css') }}"/>
+	<!-- Galery CSS -->
+	<link rel="stylesheet" href="{{ asset('css/galery.css') }}"/>
+	<!-- Form CSS -->
+	<link rel="stylesheet" href="{{ asset('css/form.css') }}"/>
+{% endblock %}
+
+{% block javascript %}
+	<!-- Main JS -->
+	<script src="{{ asset('js/main.js') }}"></script>
+	<!-- TinyMCE JS -->
+	<script src="{{ asset('Vendor/tinymce/tinymce.min.js') }}"></script>
+	<!-- Lib JS -->
+	<script src="{{ asset('js/lib.js') }}"></script>
+	<!-- Modal JS -->
+	<script src="{{ asset('js/modal.js') }}"></script>
+	<!-- Modal on JS -->
+	<script src="{{ asset('js/modal-on.js') }}"></script>
+	<!-- Nav Pagination JS -->
+	<script src="{{ asset('js/nav-action.js') }}"></script>
+	<!-- Master variable JS -->
+	<!-- Ajax event -->
+	<script src="{{ asset('js/init.ajaxEvent.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-master.js') }}"></script>
+	<script src="{{ asset('js/file-lib-master.js') }}"></script>
+	<script src="{{ asset('js/file-master.js') }}"></script>
+	<script src="{{ asset('js/gal-master.js') }}"></script>
+{% endblock %}

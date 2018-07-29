@@ -1,0 +1,54 @@
+﻿.container-fluid
+{
+	overflow : hidden;
+}
+
+.container .row
+{
+	padding : 0 15px;
+}
+
+.jiti-nobg,
+.jiti-nobg:before,
+.jiti-nobg:after
+{
+	background-color: #fff;
+}
+
+.jiti-nobg:before,
+.jiti-nobg:after
+{
+	position : absolute;
+	content : '';
+	width : 60%;
+	height : 70px;
+	top : -30px;
+}
+.jiti-nobg:before
+{
+	left : -20px;
+	transform : rotate(5deg);
+}
+.jiti-nobg:after
+{
+	right : -20px;
+	transform : rotate(-5deg);
+}
+
+.jiti-nobg
+{
+	/*z-index : -10;*/
+}
+
+
+
+.jiti-row
+{
+	z-index : -100;
+	padding-top : 30px;
+	padding-bottom : 70px;
+}
+.jiti-row > .container
+{
+	z-index : 5;
+}

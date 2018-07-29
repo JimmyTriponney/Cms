@@ -1,0 +1,16 @@
+jt_file_homepage:
+    path:     /
+    defaults: { _controller: JTFileBundle:Library:index }
+    
+jt_file_panel:
+    path:     /panel
+    defaults: { _controller: JTFileBundle:Library:panel }
+    
+jt_file_load:
+    path:     /load
+    defaults: { _controller: JTFileBundle:Library:load }
+    
+jt_file_modif:
+    path:     /modify
+    defaults: { _controller: JTFileBundle:Library:modif }
+    

@@ -1,0 +1,22 @@
+<div id="block-container">
+	<div class="container-fluid">
+		<div class="row d-flex justify-content-center">
+		{% for block in blocks %}
+			<div class="col-6 col-md-4 p-1">
+				<button class="col-12 btn btn-secondary block-select" title="{{ block.description }}" data-block-icon="{{ block.icon }}" data-block-name="{{ block.name }}" data-block-id="{{ block.id }}" data-block-content="{{ block.content }}">
+					<div class="row">
+						<div class="col-12 text-center block-icon">
+							<span class="{{ block.icon }}"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 text-center block-name">
+							<p>{{ block.name }}</p>
+						</div>
+					</div>
+				</button>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>

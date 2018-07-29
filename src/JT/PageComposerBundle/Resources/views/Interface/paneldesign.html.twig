@@ -1,0 +1,81 @@
+<div class="col-12 m-auto p-3">
+					
+	<div class="row">
+		<div class="col-12 text-center">
+			<h2>Options de design</h2>
+		</div>
+	</div>
+	
+	<hr class="m-2">
+	
+	<div class="row">
+	
+		<div class="col-12 col-md-6">
+			<div class="form-group">
+				<label for="borderColor">Couleur du texte</label>
+				<input type="color" id="color" data-target-input="color"/>
+				<button class="btn btn-secondary reset">
+					<span class="fa fa-ban action"></span>
+				</button>
+			</div>
+			<div class="form-group">
+				<label for="borderColor">Alignement</label>
+				<select id="align" data-target-input="align">
+					<option value=""></option>
+					<option value="left">Gauche</option>
+					<option value="center">Centré</option>
+					<option value="right">Droite</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="borderColor">Couleur bordures</label>
+				<input type="color" id="borderColor" data-target-input="borderColor"/>
+				<button class="btn btn-secondary reset">
+					<span class="fa fa-ban action"></span>
+				</button>
+			</div>
+			<div class="form-group">
+				<label  for="borderStyle">Style bordures</label>
+				<select type="text" class="form-control" id="borderStyle" data-target-input="borderStyle"></select>
+			</div>
+			<div class="form-group">
+				<label  for="borderSize">Taille bordures</label>
+				<input type="number" class="form-control" id="borderSize" data-target-input="borderSize"/>
+			</div>
+			<div class="form-group">
+				<label  for="borderRadius">Arrondi bordures</label>
+				<input type="number" class="form-control" id="borderRadius" data-target-input="borderRadius"/>
+			</div>
+			<div class="form-group">
+				<label  for="bgColor">Couleur d'arrière plan</label>
+				<input type="color" id="bgColor" data-target-input="bgColor"/>
+				<button class="btn btn-secondary reset">
+					<span class="fa fa-ban action"></span>
+				</button>
+			</div>
+			<div class="form-group">
+				<label  for="bgPicture">Image d'arrière plan</label>
+				<button class="btn btn-primary add-img" data-target-input="bgImg">Sélectionner une image</button>
+				<button class="btn btn-secondary reset">
+					<span class="fa fa-ban action"></span>
+				</button>
+				<input type="hidden" id="bgImg" data-target-input="bgImg"/>
+			</div>
+		</div>
+		
+		<div class="col-12 col-md-6">
+		
+			<h3 class="m-4">Espace intérieur</h3>
+			<div class="frame-padding m-auto">
+			
+				<input class="padding top" id="paddingTop" data-target-input="paddingTop"/>
+				<input class="padding right" id="paddingRight" data-target-input="paddingRight"/>
+				<input class="padding bottom" id="paddingBottom"  data-target-input="paddingBottom"/>
+				<input class="padding left" id="paddingLeft"  data-target-input="paddingLeft"/>
+				
+			</div>
+		</div>
+		
+	</div>
+
+</div>

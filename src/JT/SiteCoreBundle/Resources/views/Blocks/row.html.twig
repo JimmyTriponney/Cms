@@ -1,0 +1,66 @@
+{% set paddingTop = row.paddingTop ? (row.paddingTop+30)~'px' : '30px' %}
+{% set paddingRight = row.paddingRight ? row.paddingRight~'px' : '0px' %}
+{% set paddingBottom = row.paddingBottom ? (row.paddingBottom+30)~'px' : '30px' %}
+{% set paddingLeft = row.paddingLeft ? row.paddingLeft~'px' : '0px' %}
+{% set bgColor = row.bgColor ? row.bgColor : '#fff' %}
+{% set id = 'jiti-row-'~row.id %}
+
+<style>
+	#{{ id }},
+	#{{ id }}:after,
+	#{{ id }}:before
+	{
+		{% if row.bgImg %}
+			background-image : url('{{ asset('JTFiles/'~row.bgImg.directory~'/'~row.bgImg.nameCrypt) }}');
+			background-size : cover;
+			background-repeat : no-repeat;
+			background-attachment : fixed;
+			background-position : 50%;
+		{% endif %}
+		
+		padding : {{ paddingTop~' '~paddingRight~' '~paddingBottom~' '~paddingLeft }};
+		
+		background-color : {{ bgColor }};
+	}
+	
+</style>
+
+{% if row.bgImg %}
+	<!-- With background -->
+	<section class="col-12" id="{{ id }}">
+
+		<div class="row jiti-row">
+			{{ include('JTSiteCoreBundle:Blocks:column.html.twig', {'row' : row} ) }}
+		</div>
+
+	</section>
+{% else %}
+	<!-- No background -->
+	<section class="col-12 jiti-nobg" id="{{ id }}">
+
+		<div class="row jiti-row">
+			{{ include('JTSiteCoreBundle:Blocks:column.html.twig', {'row' : row} ) }}			
+		</div>
+
+	</section>
+{% endif %}
+
+
+
+<!-- With background -->
+<!--<section class="col-12" id="test-bg">
+
+	<div class="row jiti-row">
+		
+	</div>
+
+</section>-->
+
+<!-- No background -->
+<!--<section class="col-12 jiti-nobg">
+
+	<div class="row jiti-row">
+				
+	</div>
+
+</section>-->

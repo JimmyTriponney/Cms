@@ -1,0 +1,132 @@
+{% extends "JTPageComposerBundle::layout.html.twig" %}
+
+{% block title%}
+	Liste des pages - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+	
+	<style>
+		
+		.head-list
+		{
+			background-color : #ddd;
+			padding : 10px 0;
+			border-radius : 5px 5px 0 0;
+		}
+		.item-list > div
+		{
+			overflow : hidden;
+		}
+		.is-empty
+		{
+			font-weight : bold;
+			font-size : 2em;
+		}
+		
+	</style>
+	
+	<div class="row">
+	
+		<div class="col-12 py-2">
+		
+			<h1 class="">La question est, quelle est la question ?</h1>
+			<h2>Liste de vos formulaires</h2>
+				
+				
+			<div class="row">
+			
+				<div class="col-12">
+					
+					
+					
+					{% if forms|length %}
+					
+						<div class="row">
+							<div class="col-12 text-right mt-5 mb-1">
+								<a href="{{ path('jt_form_composer_add') }}" title="Créer un nouveau formulaire"><div class="btn btn-primary px-5">Créer un nouveau formulaire</div></a>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-12 head-list border border-secondary">
+								
+								<div class="row">
+								
+									<div class="font-weight-bold col-9 col-md-7 col-lg-6 border border-secondary border-top-0 border-left-0 text-center border-bottom-0">
+										Nom
+									</div>                                           
+																						
+									<div class="text-center font-weight-bold d-none d-md-block col-12 col-md-3 col-lg-2 border border-secondary border-top-0 border-left-0 border-bottom-0">
+										Créé / Modifié                                  
+									</div>                                              
+																						
+									<div class="text-center font-weight-bold d-none d-lg-block col-lg-2 border border-secondary border-top-0 border-left-0 border-bottom-0">
+										Par                                             
+									</div>                                           
+																						
+									<div class="text-center font-weight-bold col-3 col-md-2">
+										Action  
+									</div>	
+									
+								</div>
+								
+							</div>
+						</div>
+						
+						{% for form in forms %}
+							
+							<div class="row item-list">
+							
+								<div class="col-8 col-md-7 col-lg-6 border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-truncate">
+									{{ form.name }}
+								</div>
+								
+								<div class="col-12 col-md-3 col-lg-2 d-none d-md-block border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-center" title="{{ form.updateDate ? ' Maj : '~form.updateDate|date('d/m/Y')~' à '~form.updateDate|date('H:i:s') : 'Créé : '~form.createDate|date('d/m/Y')~' à '~form.createDate|date('H:i:s')  }}">
+									{{ form.updateDate ? ' Maj : '~form.updateDate|date('d M Y') : 'Créé : '~form.createDate|date('d M Y')  }}
+								</div>
+								
+								<div class="col-12 col-md-2 d-none d-lg-block border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-center text-truncate">
+									{{ form.userName }}
+								</div>
+								
+								<div class="text-right col-4 col-md-2 border border-secondary border-right-0 border-left-0 border-top-0 py-1">
+									
+									<a href="{{ path('jt_form_composer_edit', {'slug' : form.slug}) }}" title="Modifier le formulaire {{ form.name }}">
+										<div class="btn btn-secondary p-1 px-2"><span class="fa fa-pencil"></span></div>
+									</a>
+									
+									<a href="{{ path('jt_form_composer_delete', {'id' : form.id}) }}" title="Suprimer le formulaire {{ form.name }}">
+										<div class="btn btn-secondary p-1 px-2"><span class="fa fa-trash"></span></div>
+									</a>
+								</div>
+							</div>
+							
+						
+						{% endfor %}
+					
+					{% else %}
+					
+						<div class="row">
+							<div class="col-12 text-center mt-5 mb-2">
+								<span class="is-empty">Echanger serait sûrement un plus.</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 text-center">
+								<a href="{{ path('jt_form_composer_add') }}" title="Créer votre premier formulaire"><div class="btn btn-primary px-5">Créer votre premier formulaire</div></a>
+							</div>
+						</div>
+					
+					{% endif %}
+				</div>
+			
+			</div>
+				
+		</div>	
+
+	</div>
+		
+{% endblock %}
+
+

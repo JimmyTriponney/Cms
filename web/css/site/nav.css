@@ -1,0 +1,208 @@
+﻿.jiti-navbar
+{
+	min-height : 60px;
+}
+
+.jiti-navbar a,
+.jiti-navbar a:hover,
+.jiti-navbar a:active
+{
+	color : #fff;
+	text-decoration : none;
+}
+
+.jiti-title-nav
+{
+	font-weight : bold;
+	font-size : 2em;
+	color : #fff;
+}
+
+#menu-list
+{
+	display : none;
+}
+
+.jiti-nav-item
+{
+	color : #fff;
+	font-size : 1em;
+	cursor: pointer;
+	position : relative;
+	transition : background-color 0.2s;
+	transition : text-shadow 0.3s;
+	transition : transform 0.3s;
+}
+.jiti-nav-item:hover *:not(div)
+{
+	transform : scale(1.1);
+	text-shadow : 2px 2px 5px rgba(0,0,0,0.5);
+	transition : text-shadow 0.3s;
+	transition : transform 0.3s;
+	
+	/*background-color: #515559;
+	transition : background-color 0.3s;*/
+}
+.jiti-nav-item:active
+{
+	text-shadow : 2px 2px 5px rgba(0,0,0,0);
+	transition: text-shadow 0.3s;
+	
+	background-color: #111519;
+	transition : background-color 0.3s;
+}
+.jiti-nav-item:active *:not(div)
+{
+	transform : scale(0.8);
+	transition : transform 0.3s;
+}
+
+.jiti-nav-strip
+{
+	position : absolute;
+	bottom : 1px;
+	left : 0;
+	width : 0;
+	height : 2px;
+	background-color : #fff;
+	transition : width 0.2s;
+}
+.jiti-nav-item:hover .jiti-nav-strip
+{
+	width : 100%;
+	transition : width 0.5s;
+}
+
+.jiti-nav-icon
+{
+	color : #fff;
+	font-size : 1.5em;
+	cursor : pointer;
+}
+
+.dropdown
+{
+	background-color : rgba(255,255,255,0.2);
+}
+
+.jiti-nav-dropdown
+{
+	display : none;
+	padding : 15px 60px;
+	width : 100%;
+}	
+
+.jiti-dropdown
+{
+	color : #fff;
+	font-size: 1em;
+	border-right : 1px #fff solid;
+}
+.jiti-dropdown .jiti-drop-btn,
+.jiti-sub-btn
+{
+	padding : 5px 0;
+	cursor : pointer;
+	transition : background-color 0.2s;
+}
+.jiti-dropdown .jiti-drop-btn:hover,
+.jiti-sub-btn:hover
+{
+	background-color : #555;
+	transition : background-color 0.3s;
+}
+.jiti-dropdown .jiti-drop-btn:active,
+.jiti-sub-btn:active
+{
+	background-color : #111519;
+	transition : background-color 0.3s;
+}
+.jiti-sub-btn
+{
+	padding-left : 15px;
+}
+
+.jiti-subdropdown
+{
+	overflow : hidden;
+	position : relative;
+	color : #fff;
+	transition : background-color 0.2s;
+}
+.jiti-sub-item
+{
+	display : none;
+	/*position : relative;
+	left : -1500px;*/
+}
+
+.jiti-search-bar
+{
+	display : none;
+	width : 100%;
+	height : 80px;
+	padding : 3px 15px;
+}
+.jiti-search-bar .jiti-search
+{
+	width : 100%;
+	height : 100%;
+	background-color : transparent;
+	border : 0;
+	border-bottom : 1px #fff solid;
+	padding : 0 15px;
+	font-size : 2em;
+	color : #fff;
+}
+.jiti-search-bar .jiti-search:focus
+{
+	outline:  none;
+}
+
+.jiti-menu-desc
+{
+	color : #fff;
+	font-style : italic;
+	overflow : hidden;
+	position : relative;
+}
+.jiti-desc-content
+{
+	display : none;
+	/*position : absolute;
+	left : -1500px;*/
+}
+.jiti-menu-img img
+{
+	max-width : 100%;
+	max-height : 200px;
+}
+
+.jiti-close-dropdown
+{
+	position : absolute;
+	top : 10px;
+	left : 10px;
+}
+
+.action
+{
+	font-size : 1.2em;
+	color : #fff;
+	transition : text-shadow 0.2s;
+	transition : transform 0.3s;
+}
+.action:hover
+{
+	transform : scale(1.1);
+	text-shadow : 2px 2px 5px rgba(0,0,0,0.5);
+	transition : text-shadow 0.3s;
+	transition : transform 0.3s;
+}
+.action:active
+{
+	transform : scale(0.8);
+	text-shadow : 2px 2px 5px rgba(0,0,0,0);
+	transition: text-shadow 0.3s;
+	transition : transform 0.3s;
+}

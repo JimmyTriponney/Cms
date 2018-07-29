@@ -1,0 +1,47 @@
+<div class="col-12 library-container">
+	
+	{% for file in files %}
+		<div class="file-container col-4 col-md-3 mb-2" data-id-file="{{ file.id }}">
+			<div class="row action">
+				<span class="fa fa-trash-o trash btn"></span>
+			</div>
+			<div class="row">
+				<figure class="file-preview col-10 m-auto">
+					<img src="{{ asset('JTFiles/'~file.directory~'/'~file.nameCrypt) }}" class="file-view" alt="{{ file.alt }}" title="{{ file.title }}"/>
+				</figure>
+			</div>
+			<div class="row">
+				<div class="col-11 m-auto">
+					<p>
+						{{ file.name }}
+					</p>
+					<span>({{ file.size }} o)</span>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+
+</div>
+
+<div id="file-modif-container" class="p-2 pt-5">
+	
+	<div class="close btn">
+	  <span>&times;</span>
+	</div>
+	<div class="col-12">
+		<form method="POST" action="{{ path('jt_file_modif') }}" id="file-form-modif">
+			<input type="hidden" class="file-id" name="id"/>
+			<div class="form-group">
+				<label for="borderColor">Titre du fichier</label>
+				<input type="text" placeholder="Titre du fichier" class="file-title form-control" name="title"/>
+			</div>
+			<div class="form-group">
+				<label for="borderColor">Texte alternatif du fichier</label>
+				<input type="text" placeholder="Texte alternatif du fichier" class="file-alt form-control" name="alt"/>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Enregistrer" id="save-file-modif" class="btn btn-success form-control"/>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,62 @@
+{% set form = block.form %}
+
+<form class="col-12">
+	<div class="row">
+	{% if form.fields is defined %}
+		{% for field in form.fields %}
+			
+			{% set colMd = field.colMd ? ' col-md-'~field.colMd : '' %}
+			{% set type = field.fieldType.type %}
+						
+			{% if type == 'select' 
+				or type == 'select_multi'%}
+				
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:select.html.twig', {'field' : field} ) }}
+				</div>
+				
+			{% elseif type == 'checkbox' 
+				or type == 'radio' %}
+			
+				<div class="col-12 {{ colMd }}">
+					<div class="form-group row">
+						{{ include('JTSiteCoreBundle:Form:checkbox.html.twig', {'field' : field} ) }}
+					</div>
+				</div>
+			
+			{% elseif type == 'date' %}
+			
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:date.html.twig', {'field' : field} ) }}
+				</div>
+				
+			{% elseif type == 'upload' %}
+			
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:file.html.twig', {'field' : field} ) }}
+				</div>
+			
+			{% elseif type == 'textarea' %}
+			
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:textarea.html.twig', {'field' : field} ) }}
+				</div>
+			
+			{% elseif type == 'button' %}
+			
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:button.html.twig', {'field' : field} ) }}
+				</div>
+				
+			{% else %}
+			
+				<div class="form-group col-12 {{ colMd }}">
+					{{ include('JTSiteCoreBundle:Form:input.html.twig', {'field' : field} ) }}
+				</div>
+				
+			{% endif %}
+			
+		{% endfor %}
+	{% endif %}
+	</div>
+</form>

@@ -1,0 +1,20 @@
+
+	<!-- Library menu -->
+	<div class="row pt-5 nav">
+		<div class="col-12">
+			{{ include('JTFileBundle:library:menu.html.twig') }}
+		</div>
+	</div>
+		
+	<section class="row hidden" id="upload-window">
+		<div class="col-12">
+			{{ include('JTFileBundle:Upload:upload.html.twig') }}
+		</div>
+	</section>
+
+
+	<section class="row" id="library-window">
+		<div class="col-12">
+			{{ render( controller('JTFileBundle:library:allFiles') ) }}
+		</div>
+	</section>

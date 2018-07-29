@@ -1,0 +1,20 @@
+jt_form_composer_list:
+    path:     /
+    defaults: { _controller: JTFormComposerBundle:composer:list }
+
+jt_form_composer_add:
+    path:     /add
+    defaults:
+        _controller: JTFormComposerBundle:composer:add
+        slug :
+
+jt_form_composer_edit:
+    path:     /edit/{slug}
+    defaults:
+        _controller: JTFormComposerBundle:composer:add
+        
+jt_form_composer_delete:
+    path:     /delete/{id}
+    defaults:
+        _controller: JTFormComposerBundle:composer:delete
+    

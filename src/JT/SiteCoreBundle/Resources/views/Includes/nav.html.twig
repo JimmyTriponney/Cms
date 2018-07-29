@@ -1,0 +1,451 @@
+<header class="container-fluid">
+	<nav class="row">
+	
+		<div class="jiti-search-bar bg-dark">
+			<input type="text" name="search" placeholder="Recherche" class="jiti-search"/>
+		</div>
+				
+		<div class="col-12 bg-dark jiti-navbar">
+			<div class="row h-100">
+			
+				<!-- Logo brand -->
+				<div class="col-10 col-md-2 pt-1 pl-3 text-light jiti-title-nav">
+					TLSPP
+				</div>
+				
+				<div class="d-block d-md-none pt-3 col-1 text-left">
+					<span class="fa fa-bars jiti-nav-icon action" id="phone-menu"></span>
+				</div>
+				
+				<div class="d-block d-md-none pt-3 col-1 text-left">
+					<span class="fa fa-search jiti-nav-icon jiti-search action"></span>
+				</div>
+				
+				<!-- Menu -->
+				<div class="col-md-10" id="menu-list">
+				
+					<div class="row h-100">
+						
+						{% for item in menu.item %}
+							<div class="text-center col-md px-0 py-3 py-md-0 pt-md-3 jiti-nav-item" target-dropdown="{{ item.id }}">
+								
+								
+								
+									<span class="{{ item.icon }}"></span>&nbsp;&nbsp;
+									
+										{% if item.page or item.link %}
+											{% set link = item.page ? path('jt_site_core',{'slug':item.page.slug}) : item.link%}
+											<a href="{{ link }}">
+										{% endif %}
+											{{ item.label }}
+										{% if item.page or item.link %}
+											</a>
+										{% endif %}
+										
+									{% if item.dropdown|length > 0 %}
+										  &nbsp;&nbsp;<span class="fa fa-chevron-circle-down"></span>
+									{% endif %}
+									
+									<div class="jiti-nav-strip"></div>
+								
+								
+							</div>
+							<div class="dropdown col-12 d-md-none"></div>
+						{% endfor %}
+						
+						<div class="d-none d-md-block col-2 col-lg-1 pt-3 h-100 text-center">
+							<div class="row">
+								<div class="col-6 text-center">
+									<span class="fa fa-search jiti-nav-icon jiti-search action"></span>
+								</div>
+								
+								<div class="col-6 text-center">
+									<span class="fa fa-user-circle jiti-nav-icon action"></span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="d-none d-lg-block col-1 pt-3 h-100 text-center">
+						</div>
+						
+					</div>
+				
+				</div>
+				
+			</div>
+		</div>
+		
+		{% for item in menu.item %}
+			{% if item.dropdown|length > 0 %}
+				<div class="jiti-nav-dropdown bg-dark col-12" dropdown="{{ item.id }}">
+					<span class="d-none d-md-block jiti-close-dropdown action fa fa-chevron-up"></span>
+					<div class="row">
+					
+						<div class="col-md-3 jiti-dropdown">
+							
+							{% for dropdown in item.dropdown %}
+								<!-- Item dropdown -->
+								<div class="row jiti-drop-btn" target-subdropdown="{{ dropdown.id }}" target-description="{{ dropdown.id }}">
+									
+									
+										<div class="text-center col-1">
+											<span class="{{ dropdown.icon }}"></span>
+										</div>
+										<div class="text-left col-9">
+											{% if dropdown.page or dropdown.link %}
+												{% set link = dropdown.page ? path('jt_site_core',{'slug':dropdown.page.slug}) : dropdown.link%}
+												<a href="{{ link }}">
+											{% endif %}
+												{{ dropdown.label }}
+											{% if dropdown.page or dropdown.link %}
+												</a>
+											{% endif %}
+										</div>
+								
+								
+								</div>
+							{% endfor %}
+							
+						</div>
+						
+						<div class="col-md-3 jiti-subdropdown">
+						
+							{% for dropdown in item.dropdown %}
+								{% if dropdown.subDropdown|length > 0 %}
+									
+									<div class="row jiti-sub-item" subdropdown="{{ dropdown.id }}">
+										<div class="col-1 pt-1 d-md-none action back-menu"><span class="fa fa-chevron-left"></span></div>
+										<div class="col-11 col-md-12">
+											
+											{% for sub in dropdown.subDropdown %}
+												<div class="row jiti-sub-btn" target-description="{{ sub.id }}">
+													
+													
+													
+													<div class="text-center col-1">
+														<span class="{{ sub.icon }}"></span>
+													</div>
+													<div class="text-left col-10">
+														{% if sub.page or sub.link %}
+															{% set link = sub.page ? path('jt_site_core',{'slug':sub.page.slug}) : sub.link%}
+															<a href="{{ link }}">
+														{% endif %}
+															{{ sub.label }}
+														{% if sub.page or sub.link %}
+															</a>
+														{% endif %}
+													</div>
+								
+								
+												</div>
+											{% endfor %}
+									
+										</div>
+									</div>
+									
+								{% endif %}
+							{% endfor %}
+						
+						</div>
+						
+						<div class="d-none d-md-block col-6 jiti-menu-desc">
+						
+							{% for dropdown in item.dropdown %}
+							
+								{% if dropdown.description or dropdown.img %}
+									
+									<div class="row jiti-desc-content" description="{{ dropdown.id }}">
+										<div class="float-left col-md-12{% if dropdown.img %} col-lg-6{% endif %}">
+											<h5>{{ dropdown.label }}</h5>
+											<p class="pt-1 text-justify">
+												{{ dropdown.description|escape }}
+											</p>
+										</div>
+										{% if dropdown.img %}
+											<div class="float-left d-none d-lg-block col-6">
+												<figure class="jiti-menu-img">
+													<img src="{{ asset('JTFiles/'~dropdown.img.directory~'/'~dropdown.img.nameCrypt) }}" class="rounded" alt="{{ dropdown.img.alt }}" title="{{ dropdown.img.title }}"/>
+												</figure>
+											</div>
+										{% endif %}
+									</div>
+									
+								{% endif %}
+								
+								{% if dropdown.subDropdown|length > 0 %}
+									{% for sub in dropdown.subDropdown %}
+										{% if sub.description or sub.img %}
+										
+											<div class="row jiti-desc-content" description="{{ sub.id }}">
+												<div class="float-left col-md-12{% if sub.img %} col-lg-6{% endif %}">
+													<h5>{{ sub.label }}</h5>
+													<p class="pt-1 text-justify">
+														{{ sub.description|escape }}
+													</p>
+												</div>
+												{% if sub.img %}
+													<div class="float-left d-none d-lg-block col-6">
+														<figure class="jiti-menu-img">
+													<img src="{{ asset('JTFiles/'~sub.img.directory~'/'~sub.img.nameCrypt) }}" class="rounded" alt="{{ sub.img.alt }}" title="{{ sub.img.title }}"/>
+														</figure>
+													</div>
+												{% endif %}
+											</div>
+										
+										{% endif %}
+									{% endfor %}
+								{% endif %}
+							
+							{% endfor %}
+						
+						</div>
+						
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</nav>
+</header>
+
+<script>
+	$(function(){
+		var 
+			//For phone
+			btnPhoneMenu = '#phone-menu',
+			menuList = '#menu-list',
+			itemDrop = '.dropdown',
+			backMenu = '.back-menu',
+			//End phone
+			
+			navBar = '.jiti-navbar',
+			navItem = '.jiti-nav-item',
+			navSearch = '.jiti-search-bar',
+			navDropItem = '.jiti-drop-btn',
+			navSubDropItem = '.jiti-sub-btn',
+			closeDrop = '.jiti-close-dropdown',
+			descContent = '.jiti-desc-content',
+			searchBtn = '.jiti-search',
+			navDesc = '.jiti-menu-desc',
+			dropdown = '[dropdown]',
+			subDropdown = '[subdropdown]',
+			targetDesc = 'target-description',
+			targetDrop = 'target-dropdown',
+			targetSubDrop = 'target-subdropdown';
+		
+		
+		
+		/********
+			dropdown menu
+		********/
+		$(dropdown).slideUp('fast');
+		$(itemDrop).slideUp('fast');
+		$(navItem).each(function()
+		{
+			var $this = $(this),
+				target = $this.attr(targetDrop);
+				
+			$this.on('click',function(e)
+			{			
+				//On phone and tablette
+				if( $(window).width() < 768 
+					&& e.handleObj.origType == 'click')
+				{
+					var targetDrop = $(this).next(itemDrop),
+						htmlDrop = $($('[dropdown="'+target+'"]').html());
+				
+									
+					htmlDrop.find(subDropdown).css({'left':0});
+					htmlDrop.find(subDropdown).slideUp('fast');
+					
+					htmlDrop.find(backMenu).each(function()
+					{
+						$(this).on('click',function()
+						{
+							var $this = $(this),
+								sub = $this.closest(subDropdown),
+								backDrop = sub.attr('subdropdown');
+							sub.slideUp('slow');
+							htmlDrop.find('.jiti-dropdown').slideDown('slow');
+						});
+					});
+					
+					htmlDrop.find(navDropItem).each(function()
+					{
+						$(this).on('click',function()
+						{
+							var $this = $(this),
+								target = $this.attr(targetSubDrop);
+							
+							htmlDrop.find('.jiti-dropdown').slideUp('slow');
+							htmlDrop.find('[subdropdown="'+target+'"]').slideDown('slow');
+						});
+					});
+					
+					$(itemDrop).slideUp('slow');
+					targetDrop.html( htmlDrop );
+					targetDrop.slideDown('slow');
+				}
+				//On desktop
+				else if($(window).width() >= 768)
+				{
+					$('[description]').slideUp('fast');
+					$(navSearch).slideUp('slow');
+					$(subDropdown).slideUp('fast');
+					$(navSearch).slideUp('slow');
+					$(dropdown).slideUp();
+					$('[dropdown="'+target+'"]').stop(true);
+					$('[dropdown="'+target+'"]').slideDown('slow');
+				}
+			});
+		});
+		
+		$('header').on('mouseleave',function()
+		{
+			$(dropdown).slideUp('slow');
+			$(dropdown+' '+subDropdown).slideUp('fast');
+			$('[description]').slideUp('fast');
+			$(navSearch).slideUp('slow');
+		});
+		
+		
+		/*********
+			search menu
+		*********/
+		$(navSearch).slideUp('fast');
+		$(searchBtn).on('click',function()
+		{
+			if($(btnPhoneMenu).is('.active')) $(btnPhoneMenu).trigger('click');
+			$(itemDrop).slideUp('slow');
+			$(dropdown).slideUp('slow');
+			$(navSearch).slideDown('slow');
+			$(subDropdown).slideUp('fast');
+		});
+		$(searchBtn+' input').on('focusout',function()
+		{
+			$(navSearch).slideUp('fast');
+		});
+		//Btn close dropdown
+		$(closeDrop).on('click',function()
+		{
+			$('header').trigger('mouseleave');
+		});
+		
+		/**********
+			Subropdown menu
+		***********/
+		$(navDropItem).each(function()
+		{
+			var $this = $(this);
+			$this.on('click',function()
+			{
+				var $that = $(this),
+					target = $that.attr(targetSubDrop);
+					
+				$(subDropdown).slideUp('fast');
+				$('[subdropdown="'+target+'"]').slideDown('slow');
+			});
+		});
+		
+		
+		
+		
+		
+		
+		/**************
+			Description menu
+		**************/
+		$(navDropItem+','+navSubDropItem).each(function()
+		{
+			$(this).on('mouseenter',function()
+			{
+				var $this = $(this),
+					target = $this.attr(targetDesc);	
+				
+				console.log($(descContent+'[description="'+target+'"]').is('.active'));
+				console.log(target);
+				
+				if( !$(descContent+'[description="'+target+'"]').is('.active') )
+				{
+					$('[description].active').slideUp('fast');
+					$('[description].active').removeClass('active');
+					
+					$(descContent+'[description="'+target+'"]').stop();
+					$(descContent+'[description="'+target+'"]').addClass('active');	
+					$(descContent+'[description="'+target+'"]').slideDown('slow');
+				}
+			});
+		});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		/*************
+			Truncate menu
+		**************/
+		$(navDesc).find('p').each(function()
+		{
+			var $this = $(this),
+				text = $this.text(),
+				truncate = text.substring(0,300);
+			
+			if(text.length > 300) truncate += '...'
+			
+			$this.text(truncate);
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/******************
+			Phone menu
+		******************/
+		//Adjust menu list
+		if($(window).width() >= 768) $(menuList).css('display','block');
+		$(window).on('resize',function()
+		{
+			var $this = $(this),
+				width = $this.width();
+			if(width >= 768)
+			{
+				$(menuList).slideDown('slow');
+				$(btnPhoneMenu).removeClass('active');
+			}
+			else
+				$(menuList).css('display','none');
+		});
+		
+		//Open with button
+		$(btnPhoneMenu).on('click',function()
+		{
+			var $this = $(this),
+				isActive = $this.is('.active');
+			
+			$(navSearch).slideUp('slow');
+			
+			if(isActive)
+			{
+				$(menuList).slideUp('slow');
+				$(itemDrop).slideUp('slow');
+			}
+			else
+			{
+				$(menuList).slideDown('slow');
+			}
+				
+			$this.toggleClass('active');
+		});
+	
+	});
+	
+	
+</script>

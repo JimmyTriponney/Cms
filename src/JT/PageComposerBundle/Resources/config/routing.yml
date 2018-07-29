@@ -1,0 +1,22 @@
+jt_pagecomposer_add:
+    path:     add
+    defaults:
+        _controller: JTPageComposerBundle:interface:view
+        slug :
+
+jt_pagecomposer_edit:
+    path:     edit/{slug}
+    defaults:
+        _controller: JTPageComposerBundle:interface:view
+
+jt_pagecomposer_list:
+    path:     /
+    defaults:
+        _controller: JTPageComposerBundle:interface:list
+
+jt_pagecomposer_delete:
+    path:     delete/{id}
+    defaults:
+        _controller: JTPageComposerBundle:interface:delete
+    requirements:
+        id: \d*

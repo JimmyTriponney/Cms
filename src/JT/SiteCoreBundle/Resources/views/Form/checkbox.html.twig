@@ -1,0 +1,45 @@
+{% set name = field.slug %}
+{% set label = field.name %}
+{% set value = field.fieldValue %}
+{% set class = field.htmlClass %}
+{% set id = field.htmlId %}
+{% set options = field.fieldOptions %}
+{% set type = field.fieldType.type %}
+{% set required = field.fieldRequired ? 'required' : '' %}
+
+<div id="{{ id }}" class="col-sm-12">{{ label }}</div>
+
+
+<div class="col-12">
+	
+		{% for option in options %}
+		
+			{% set lab = option.optLabel %}
+			{% set val = option.optValue %}
+			<div class="form-check">
+				
+				<label class="form-check-label">
+					<input {{ required }} type="{{ type }}" name="{{ name }}" class="form-check-input {{ class }}" value="{{ val }}" {% if value == val %}checked{% endif %}/>
+					<span></span>
+					{{ lab }}
+				</label>
+				
+			</div>
+
+		{% endfor %}
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

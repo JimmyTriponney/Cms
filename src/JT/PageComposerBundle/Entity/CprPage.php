@@ -1,0 +1,598 @@
+<?php
+
+namespace JT\PageComposerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * CprPage
+ *
+ * @ORM\Table(name="cpr_page")
+ * @ORM\Entity(repositoryClass="JT\PageComposerBundle\Repository\CprPageRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class CprPage
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+	  * @Assert\NotBlank()
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
+	 * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="keyword", type="text", nullable=true)
+     */
+    private $keyword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tag", type="text", nullable=true)
+     */
+    private $tag;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tag_auto", type="text", nullable=true)
+     */
+    private $tagAuto;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_date", type="datetime", nullable=true)
+     */
+    private $createDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $updateDate;
+	
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="published", type="boolean", nullable=true)
+     */
+    private $published;
+	
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="count_elem", type="integer", nullable=true)
+     */
+    private $countElem;
+	
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_name", type="string", nullable=true)
+     */
+    private $userName;
+	
+    /**
+     * Entity Row
+     *
+     * @ORM\ManyToMany(targetEntity="CprRow", cascade="all", orphanRemoval=true)
+     */
+    private $row;
+	
+	/**
+     * @var Entity
+     *
+     * @ORM\OneToMany(targetEntity="\JT\MenuComposerBundle\Entity\CprMenuItem", mappedBy = "page")
+     */
+	 private $menuItem;
+	
+	/**
+     * @var Entity
+     *
+     * @ORM\OneToMany(targetEntity="\JT\MenuComposerBundle\Entity\CprMenuDropdown", mappedBy = "page")
+     */
+	 private $menuDropdown;
+	
+	/**
+     * @var Entity
+     *
+     * @ORM\OneToMany(targetEntity="\JT\MenuComposerBundle\Entity\CprMenuSubDropdown", mappedBy = "page")
+     */
+	 private $menuSubDropdown;
+	
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return CprPage
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return CprPage
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set keyword
+     *
+     * @param string $keyword
+     *
+     * @return CprPage
+     */
+    public function setKeyword($keyword)
+    {
+        $this->keyword = $keyword;
+
+        return $this;
+    }
+
+    /**
+     * Get keyword
+     *
+     * @return string
+     */
+    public function getKeyword()
+    {
+        return $this->keyword;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return CprPage
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param string $tag
+     *
+     * @return CprPage
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set tagAuto
+     *
+     * @param string $tagAuto
+     *
+     * @return CprPage
+     */
+    public function setTagAuto($tagAuto)
+    {
+        $this->tagAuto = $tagAuto;
+
+        return $this;
+    }
+
+    /**
+     * Get tagAuto
+     *
+     * @return string
+     */
+    public function getTagAuto()
+    {
+        return $this->tagAuto;
+    }
+
+    /**
+     * Set createDate
+     *
+     * @param \DateTime $createDate
+     *
+     * @return CprPage
+     */
+    public function setCreateDate(\DateTime $createDate)
+    {
+        $this->createDate = $createDate;
+		
+        return $this;
+    }
+
+    /**
+     * Get createDate
+     *
+     * @return \DateTime
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
+    }
+
+    /**
+     * Set updateDate
+     *
+     * @param \DateTime $updateDate
+     *
+     * @return CprPage
+     */
+    public function setUpdateDate(\DateTime $updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return CprPage
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->row = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add row
+     *
+     * @param \JT\PageComposerBundle\Entity\CprRow $row
+     *
+     * @return CprPage
+     */
+    public function addRow(\JT\PageComposerBundle\Entity\CprRow $row)
+    {
+        $this->row[] = $row;
+
+        return $this;
+    }
+
+    /**
+     * Remove row
+     *
+     * @param \JT\PageComposerBundle\Entity\CprRow $row
+     */
+    public function removeRow(\JT\PageComposerBundle\Entity\CprRow $row)
+    {
+        $this->row->removeElement($row);
+    }
+
+    /**
+     * Get row
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRow()
+    {
+        return $this->row;
+    }
+	
+	
+	/**
+	* @ORM\PrePersist
+	*/
+	public function prePersist()
+	{
+		$dateTime = new \DateTime();
+		
+		$this->setCreateDate($dateTime);
+	}
+	
+	/**
+	* @ORM\PreUpdate
+	*/
+	public function preUpdate()
+	{
+		$dateTime = new \DateTime();
+		
+		$this->setUpdateDate($dateTime);
+	}
+	
+	/**
+	* @ORM\PreRemove
+	*/
+	public function preRemove()
+	{
+		//Remove in menu
+			//Item
+			foreach($this->getMenuItem() as $item)
+			{
+				$item->setPage(NULL);
+				$this->removeMenuItem($item);
+			}
+			//Dropdown
+			foreach($this->getMenuDropdown() as $dropdown)
+			{
+				$dropdown->setPage(NULL);
+				$this->removeMenuDropdown($dropdown);
+			}
+			//SubDropdown
+			foreach($this->getMenuSubDropdown() as $subDropdown)
+			{
+				$subDropdown->setPage(NULL);
+				$this->removeMenuSubDropdown($subDropdown);
+			}
+	}
+
+    /**
+     * Set countElem
+     *
+     * @param integer $countElem
+     *
+     * @return CprPage
+     */
+    public function setCountElem($countElem)
+    {
+        $this->countElem = $countElem;
+
+        return $this;
+    }
+
+    /**
+     * Get countElem
+     *
+     * @return integer
+     */
+    public function getCountElem()
+    {
+        return $this->countElem;
+    }
+
+    /**
+     * Set userName
+     *
+     * @param string $userName
+     *
+     * @return CprPage
+     */
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
+
+    /**
+     * Get userName
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * Add menuItem
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuItem $menuItem
+     *
+     * @return CprPage
+     */
+    public function addMenuItem(\JT\MenuComposerBundle\Entity\CprMenuItem $menuItem)
+    {
+        $this->menuItem[] = $menuItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove menuItem
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuItem $menuItem
+     */
+    public function removeMenuItem(\JT\MenuComposerBundle\Entity\CprMenuItem $menuItem)
+    {
+        $this->menuItem->removeElement($menuItem);
+    }
+
+    /**
+     * Get menuItem
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenuItem()
+    {
+        return $this->menuItem;
+    }
+
+    /**
+     * Add menuDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuDropdown $menuDropdown
+     *
+     * @return CprPage
+     */
+    public function addMenuDropdown(\JT\MenuComposerBundle\Entity\CprMenuDropdown $menuDropdown)
+    {
+        $this->menuDropdown[] = $menuDropdown;
+
+        return $this;
+    }
+
+    /**
+     * Remove menuDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuDropdown $menuDropdown
+     */
+    public function removeMenuDropdown(\JT\MenuComposerBundle\Entity\CprMenuDropdown $menuDropdown)
+    {
+        $this->menuDropdown->removeElement($menuDropdown);
+    }
+
+    /**
+     * Get menuDropdown
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenuDropdown()
+    {
+        return $this->menuDropdown;
+    }
+
+    /**
+     * Add menuSubDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuSubDropdown $menuSubDropdown
+     *
+     * @return CprPage
+     */
+    public function addMenuSubDropdown(\JT\MenuComposerBundle\Entity\CprMenuSubDropdown $menuSubDropdown)
+    {
+        $this->menuSubDropdown[] = $menuSubDropdown;
+
+        return $this;
+    }
+
+    /**
+     * Remove menuSubDropdown
+     *
+     * @param \JT\MenuComposerBundle\Entity\CprMenuSubDropdown $menuSubDropdown
+     */
+    public function removeMenuSubDropdown(\JT\MenuComposerBundle\Entity\CprMenuSubDropdown $menuSubDropdown)
+    {
+        $this->menuSubDropdown->removeElement($menuSubDropdown);
+    }
+
+    /**
+     * Get menuSubDropdown
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenuSubDropdown()
+    {
+        return $this->menuSubDropdown;
+    }
+}

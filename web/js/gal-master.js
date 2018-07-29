@@ -1,0 +1,1 @@
+﻿var $blockMedia = '.cpr-galery-block';

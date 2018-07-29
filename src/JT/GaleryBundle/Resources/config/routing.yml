@@ -1,0 +1,9 @@
+jt_gallery_homepage:
+    path:     /
+    defaults:
+        _controller: JTGaleryBundle:Galery:add
+        
+jt_gallery_add:
+    path:     /add
+    defaults:
+        _controller: JTGaleryBundle:Galery:add

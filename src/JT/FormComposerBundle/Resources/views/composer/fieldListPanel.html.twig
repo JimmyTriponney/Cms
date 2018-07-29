@@ -1,0 +1,27 @@
+<!---------------------
+	Fields list panel
+----------------------->
+<div id="fieldList" class="hidden">
+	<div class="container-fluid">
+		<div class="row">
+			
+			{% for fieldType in fieldList %}
+				<div class="p-1 text-center col-5 col-md-3 fieldType" data-id="{{ fieldType.id }}" data-name="{{ fieldType.name }}" data-type="{{ fieldType.type }}" data-icon="{{ fieldType.icon }}">
+					<div class="btn btn-secondary col-12">
+						<div class="row">
+							<div class="col-12">
+								<span class="{{ fieldType.icon }}"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<p>{{ fieldType.name }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			
+		</div>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+{% extends "JTSiteCoreBundle::layout.html.twig" %}
+
+{% block title %}
+	{% if page.title is defined %}
+		{{ page.title }}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+
+	{% for row in page.row %}
+		{{ include('JTSiteCoreBundle:Blocks:row.html.twig', {'row':row} ) }}
+	{% endfor %}
+
+{% endblock %}

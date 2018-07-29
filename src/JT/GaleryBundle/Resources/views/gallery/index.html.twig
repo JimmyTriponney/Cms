@@ -1,0 +1,18 @@
+{% extends 'JTGaleryBundle::layout.html.twig' %}
+
+{% block title%}
+	Création de galery - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+		{{ include('JTGaleryBundle:gallery:add.html.twig') }}
+{% endblock %}
+
+
+
+{% block javascript %}
+	{{ parent() }}
+	<script src="{{ asset('js/gal-media-ajust.js') }}"></script>
+	<script src="{{ asset('js/galery-card.class.js') }}"></script>
+	<script src="{{ asset('js/modal.class.js') }}"></script>
+{% endblock %}

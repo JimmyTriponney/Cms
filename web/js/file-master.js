@@ -1,0 +1,17 @@
+﻿var directory = 'Files',
+	$upContainer = 'upload-container',
+	$upBrowseButton = 'upload-browse',
+	$upList = 'upload-list',
+	$upFile = 'upload-file',
+	$upSize = 'upload-size',
+	$upLoad = 'upload-load',
+	$upDrop = 'upload-droparea',
+	$upPorgress = 'upload-progress',
+	$upDropHover = 'upload-drop-hover',
+	$upTime = 'upload-time',
+	$upRemainTime = 'upload-remain-time',
+	$upTimeContainer = 'upload-time-container',
+	$upRemove = 'upload-remove',
+	
+	fileInProgress = {},
+	counter = {};

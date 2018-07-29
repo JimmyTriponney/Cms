@@ -1,0 +1,192 @@
+﻿.form-group
+{
+	position : relative;
+}
+input:required,
+input:not(:required),
+textarea:required,
+textarea:not(:required),
+select:required,
+select:not(:required)
+{
+	padding-left : 20px;
+	overflow-x : hidden;
+}
+
+.ast
+{
+	position : absolute;
+	top : 0px;
+	left : 20px;
+	transition : color 1s, font-size 1s;
+}
+
+input:invalid + .ast:before,
+input:required + .ast:before,
+textarea:invalid + .ast:before,
+textarea:required + .ast:before,
+select:invalid + .ast:before,
+select:required + .ast:before
+{
+	content : "*";
+	font-size : 1.5em;
+	color : red;
+	transition : color 1s, font-size 1s;
+}
+
+input:not(:required):invalid + .ast:before
+{
+	content : "!";
+	font-size : 1.5em;
+	color : red;
+	transition : color 1s, font-size 1s;
+}
+
+input:valid + .ast:before,
+textarea:valid + .ast:before,
+select:valid + .ast:before
+{
+	font-size : 1.5em;
+	color : green;
+	transition : color 1s, font-size 1s;
+}
+
+form::after
+{
+	content : '* : Champ obligatoire. | ! : Erreur de syntax.';
+	font-size : 0.7em;
+}
+
+
+/***********
+
+	CSS For checkbox and radio
+	
+*************/
+
+.form-check-label
+{
+	cursor : pointer;
+	display : block;
+}
+.form-check-label:hover span
+{
+	color: #000;
+}
+.form-check-label:hover span::before
+{
+	box-shadow: 0 0 2px #ccc;
+}
+
+
+.form-check-input
+{
+	vertical-align: middle;
+	height : 100%;
+	opacity: 0;
+	position: absolute;
+}
+.form-check-input + span
+{
+	font: normal 11px/14px Arial, Sans-serif;
+	color: #333;
+}
+.form-check-input + span::before
+{
+	content: "";
+	width: 12px;
+	height: 12px;
+	margin: 0 4px 0 0;
+	border: solid 1px #a8a8a8;
+	line-height: 14px;
+	text-align: center;
+	 
+	background: #ccc;
+}
+input[type=checkbox] + span::before
+{
+	border-radius : 2px;
+	padding : 5px 10px;
+}
+input[type=radio] + span::before
+{
+	border-radius : 100%;
+	padding : 5px 10px;
+}
+.form-check-input:checked + span::before,
+.input[type=radio]:checked:hover + span::before
+{
+	content: "\2714";
+	font-size: 12px;
+	color: #666;
+	padding : 4px 5px;
+}
+
+.form-check-input:not(:checked):hover + span::before
+{
+	content: "\2714";
+	font-size: 12px;
+	color: #aaa;
+	padding : 4px 5px;
+}
+
+
+
+
+/********************
+
+	upload file
+
+*******************/
+/* Upload zone */
+.uploader .upload-droparea
+{
+	border : 4px #ddd dashed;
+	border-radius : 5px;
+	padding : 50px 10px;
+	text-align : center;
+	position : relative;
+}
+.uploader .upload-droparea p:first-child
+{
+	font-size : 3em;
+	opacity : 0.5;
+}
+
+.uploader .upload-droparea.upload-drop-hover,
+.uploader .upload-droparea.upload-drop-hover p
+{
+	border-color : #83b4d8;
+	color : #83b4d8;
+	opacity : 1;
+}
+
+/* Files list */
+.uploader .upload-list .upload-file
+{
+	position : relative;
+	margin-top : 10px;
+	color : #bbb;
+	text-align : left;
+}
+.uploader .upload-list .upload-file .upload-size
+{
+	text-transform: uppercase;
+}
+
+/* Progress bar */
+.upload-progress
+{
+	background-color : #fff;
+	height : 10px;
+	width : 100%;
+	display : block;
+}
+.upload-file .upload-remove
+{
+	position : absolute;
+	right : -7px;
+	top : 4px;
+	color : red;
+	font-weight : bold;
+}

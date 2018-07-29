@@ -1,0 +1,67 @@
+{% set paddingTop = block.paddingTop ? block.paddingTop~'px' : '0' %}
+{% set paddingRight = block.paddingRight ? block.paddingRight~'px' : '0' %}
+{% set paddingBottom = block.paddingBottom ? block.paddingBottom~'px' : '0' %}
+{% set paddingLeft = block.paddingLeft ? block.paddingLeft~'px' : '0' %}
+
+{% set borderSize = block.borderSize ? block.borderSize~'px' : '0' %}
+{% set borderStyle = block.borderStyle ? block.borderStyle : 'none' %}
+{% set borderColor = block.borderColor ? block.borderColor : '#000' %}
+{% set borderRadius = block.borderRadius ? block.borderRadius~'px' : '0' %}
+
+{% set color = block.color ? block.color : 'inherit' %}
+{% set align = block.align ? block.align : 'left' %}
+
+{% set blockType = block.block.content %}
+
+{% set id = 'jiti-block-'~block.id %}
+{% set htmlClass = block.htmlClass %}
+
+<style>
+
+	#{{ id }}
+	{
+		overflow : hidden;
+		padding : {{ paddingTop~' '~paddingRight~' '~paddingBottom~' '~paddingLeft }};
+		border : {{ borderSize~' '~borderStyle~' '~borderColor }};
+		border-radius : {{ borderRadius }};
+		color : {{ color }};
+		
+		{% if block.bgImg %}
+			background-image : url('{{ asset('JTFiles/'~block.bgImg.directory~'/'~block.bgImg.nameCrypt) }}');
+			background-size : cover;
+			background-repeat : no-repeat;
+			background-position : 50%;
+		{% elseif block.bgColor %}
+			background-color : {{ block.bgColor }};
+		{% endif %}
+	}
+	#{{ id }} .separator
+	{
+		height : 2px;
+		background-color : {{ block.bgColor ? block.bgColor : '#ddd' }};
+	}
+
+</style>
+
+<div class="col-12 {{ htmlClass }}" id="{{ id }}">
+	<div class="row">
+		{% if blockType == 'inline' 
+			or blockType == 'image'
+			or blockType == 'text' 
+			or blockType == 'form'
+			or blockType == 'separator' %}
+		
+			{{ include('JTSiteCoreBundle:Blocks:'~blockType~'.html.twig', {'block' : block} ) }}
+			
+		{% else %}
+
+			{{dump(blockType)}}
+			
+		{% endif %}
+	</div>
+</div>
+
+
+
+
+

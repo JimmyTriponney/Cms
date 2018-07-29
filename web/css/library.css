@@ -1,0 +1,80 @@
+﻿
+.file-container
+{
+	height : 215px;
+	float : left;
+	padding : 25px 0 0;
+	border : 1px #ddd solid;
+	border-radius : 5px;
+}
+.file-container p
+{
+	overflow : hidden;
+	height : 50px;
+	margin : 0;
+}
+.file-container.file-active
+{
+	border-color : #83b4d8;
+	color : #83b4d8;
+}.file-container.file-active .file-view{opacity : 0.5;}
+
+.file-container:hover
+{
+	border-color : #83b4d8;
+	color : #83b4d8;
+	opacity : 0.5;
+}
+
+.file-container .trash
+{
+	position : absolute;
+	right : 0px;
+	top : 0px;
+}
+
+.file-preview
+{
+	background-color : #ddd;
+	cursor : pointer;
+	padding : 0;
+	height : 100px;
+	overflow : hidden;
+	border : 1px #ddd solid;
+	border-radius : 5px;
+}
+
+.file-view
+{
+	margin : auto;
+	height : 100%;
+}
+
+/*******************
+*
+*	Form file modif
+*
+********************/
+#file-modif-container
+{
+	opacity : 0;
+	display : none;
+	background-color : #fff;
+	position : absolute;
+	border : 1px #ddd solid;
+	border-radius : 5px;
+	right : 0;
+	top : 0;
+	min-height : 100%;
+}
+#file-modif-container .close
+{
+	position : absolute;
+	top : 0;
+	right : 0;
+}
+
+
+
+
+

@@ -1,0 +1,42 @@
+{# Search column #}
+
+{% for x in 0..row.column|length %}
+	{% for column in row.column %}
+		{% if column.vars.value.pageOrder == i %}
+			
+			{% set i = i+1 %}
+			
+			{% set value = column.vars.value %}
+			{% set colXs = value.colXs ? 'col-'~value.colXs : 'col' %}
+			{% set colSm = value.colSm ? 'col-sm-'~value.colSm : '' %}
+			{% set colMd = value.colMd ? 'col-md-'~value.colMd : '' %}
+			{% set colLg = value.colLg ? 'col-lg-'~value.colLg : '' %}
+						
+			<div class="{{ colXs~' '~colSm~' '~colMd~' '~colLg }} mb-2 cpr-column bg-white p-2">
+
+				{# Action menu for column #}
+				<div class="nav-action-right">
+					<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+					<div class="btn-group panel-action">
+						<div class="btn btn-secondary remove"><span class="fa fa-trash action"></span></div>
+						<div class="btn btn-secondary add"><span class="fa fa-plus-circle action"></span></div>
+						<div class="btn btn-secondary edit"><span class="fa fa-pencil action"></span></div>
+						<div class="btn btn-secondary"><span class="fa fa-arrows action"></span></div>
+					</div>
+				</div>
+				
+				{{ include('JTPageComposerBundle:Interface:tst-block.html.twig') }}
+				
+				<div class="form-column">
+					{{ form_widget(column) }}
+					{# widget for prototype #}
+					<div id="{{column.block.vars.id}}" data-prototype="{{ form_widget(column.block.vars.prototype)|e }}" class="hidden"></div>
+				</div>
+
+			</div>
+			
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+		
+		

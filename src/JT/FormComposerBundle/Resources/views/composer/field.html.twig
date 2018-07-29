@@ -1,0 +1,80 @@
+{% set i = 0 %}
+
+{% for i in i..form.vars.value.countElem-1 %}
+	
+	{% for field in form.fields %}
+		
+		{% set formOrder = field.vars.value.formOrder %}
+		
+		{% if formOrder == i %}
+		
+			{% set icon = field.vars.value.fieldType.icon %}
+			{% set name = field.vars.value.name %}
+			{% set colMd = field.vars.value.colMd ? 'col-md-'~field.vars.value.colMd : '' %}
+			
+			<div class="col-12 {{ colMd }} cpr-form-field">
+				<div class="nav-action-left">
+					<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+					<div class="btn-group panel-action">
+						<div class="btn btn-secondary"><span class="fa fa-arrows action"></span></div>
+						<div class="btn btn-secondary edit"><span class="fa fa-pencil action"></span></div>
+						<div class="btn btn-secondary remove"><span class="fa fa-trash action"></span></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-hidden col-12 hidden">
+									
+						
+						<!-- New option -->
+						<div id="{{field.fieldOptions.vars.id}}" data-prototype="{{ form_widget(field.fieldOptions.vars.prototype)|e }}">option</div>
+						<!-- New conditionGroup -->
+						<div id="{{field.fieldConditionGroup.vars.id}}" data-prototype="{{ form_widget(field.fieldConditionGroup.vars.prototype)|e }}">conditionGroup</div>
+				
+						<div class="field-options">
+							
+							{% for option in field.fieldOptions %}
+							
+								<div class="option">
+									{{ form_widget(option) }}
+								</div>
+							
+							{% endfor %}
+							
+						</div>
+						
+						<div class="field-conditions">
+						
+							{% for conditionGroup in field.fieldConditionGroup %}
+							
+								<div class="field-condition-group">
+								
+									{% for condition in conditionGroup.conditions %}
+										<div class="field-condition">
+											{{ form_widget(condition) }}
+										</div>
+									{% endfor%}		
+
+								</div>
+								
+							{% endfor %}
+						
+						</div>
+						
+						{{ form_widget(field) }}
+						
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-12 text-center p-3">
+						<span class="cpr-field-icon {{ icon }}"></span>
+						<span class="field-name-view">{{ name }}</span>
+					</div>
+				</div>
+			</div>
+		
+		{% endif %}
+				
+	{% endfor %}
+
+{% endfor %}

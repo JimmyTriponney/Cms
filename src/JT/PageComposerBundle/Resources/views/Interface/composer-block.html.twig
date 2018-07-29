@@ -1,0 +1,52 @@
+{# Search block #}
+	{% for y in 0..column.block|length %}
+		{% for block in column.block %}
+			{% if block.vars.value.pageOrder == counter %}
+				{% set counter = counter+1 %}
+				{% set blockInfo = block.vars.value.block %}
+				
+				<div class="row">
+					<div class="col-11 p-1 m-auto cpr-block text-center" data-block-content="{{ blockInfo.content }}" data-block-name="{{ blockInfo.name }}">
+
+						{# Action menu for block #}
+						<div class="nav-action">
+							<span class="fa fa-pencil action btn-edit-block mr-2 edit"></span>
+							<span class="fa fa-trash action btn-trash-edit remove"></span>
+						</div>
+
+						<div class="form-block hidden">
+							{{ form_widget(block) }} 
+						</div>
+						
+						{% if blockInfo.content != 'row' %}
+							<div class="row">
+								<div class="col-12 text-center">
+									<span class="cpr-block-icon {{ blockInfo.icon }}"></span>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-12 text-center text-capitalize">
+									<span class="cpr-block-title">{{ blockInfo.name }}</span>
+								</div>
+							</div>
+						{% else %}
+							<div class="row">
+								<div class="col-12 cpr-block-row">
+									
+										{{ include('JTPageComposerBundle:Interface:composer-row.html.twig') }}
+									
+								</div>
+							</div>
+						{% endif %}
+						
+						<div class="form-block">
+							{{ form_widget(block) }} 
+						</div>
+						
+					</div>
+				</div>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+			

@@ -1,0 +1,36 @@
+	<div class="" id="panel-options">
+		
+		<main class="container-fluid">
+		
+			<!-- Menu design -->
+			<div class="row nav">
+				<div class="col-12">
+					<nav>
+					  <ul class="pagination justify-content-center">
+						<li class="page-item active" data-target=".panel-design"><a class="page-link" href="#">Options de design</a></li>
+						<li class="page-item" data-target=".panel-content"><a class="page-link" href="#">Options de contenus</a></li>
+						<li class="page-item" data-target=".panel-responsive"><a class="page-link" href="#">Responsive</a></li>
+					  </ul>
+					</nav>
+				</div>
+			</div>
+				
+			<!-- Panel design -->
+			<div class="row panel-content">
+				{{ include('JTPageComposerBundle:Interface:panelcontent.html.twig') }}	
+			</div>
+			
+			
+			<!-- Panel design -->
+			<div class="row panel-design">
+				{{ include('JTPageComposerBundle:Interface:paneldesign.html.twig') }}
+			</div>
+			
+			<!-- Panel responsive -->
+			<div class="row panel-responsive">
+				{{ include('JTPageComposerBundle:Interface:panelresponsive.html.twig') }}
+			</div>
+		
+		</main>
+		
+	</div>

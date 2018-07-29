@@ -1,0 +1,52 @@
+﻿/* Upload zone */
+.uploader #upload-droparea
+{
+	border : 4px #ddd dashed;
+	border-radius : 5px;
+	padding : 50px 10px;
+	text-align : center;
+	position : relative;
+}
+.uploader #upload-droparea p:first-child
+{
+	font-size : 3em;
+	opacity : 0.5;
+}
+
+.uploader #upload-droparea.upload-drop-hover,
+.uploader #upload-droparea.upload-drop-hover p
+{
+	border-color : #83b4d8;
+	color : #83b4d8;
+	opacity : 1;
+}
+
+/* Files list */
+.uploader #upload-list .upload-file
+{
+	position : relative;
+	margin-top : 10px;
+	color : #bbb;
+	text-align : left;
+}
+.uploader #upload-list .upload-file .upload-size
+{
+	text-transform: uppercase;
+}
+
+/* Progress bar */
+.upload-progress
+{
+	background-color : #fff;
+	height : 10px;
+	width : 100%;
+	display : block;
+}
+.upload-file .upload-remove
+{
+	position : absolute;
+	right : -7px;
+	top : 4px;
+	color : red;
+	font-weight : bold;
+}

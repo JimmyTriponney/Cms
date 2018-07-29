@@ -1,0 +1,187 @@
+{% extends "JTPageComposerBundle::layout.html.twig" %}
+
+{% block title%}
+	Liste des pages - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+	
+	<style>
+		
+		.head-list
+		{
+			background-color : #ddd;
+			padding : 10px 0;
+			border-radius : 5px 5px 0 0;
+		}
+		.item-list > div
+		{
+			overflow : hidden;
+		}
+		.is-empty
+		{
+			font-weight : bold;
+			font-size : 2em;
+		}
+		
+	</style>
+	
+	<div class="row">
+	
+		<div class="col-12 py-2">
+		
+			<h1 class="">Rafraichissez vos contenus.</h1>
+			<h2>Liste de vos pages</h2>
+				
+				
+			<div class="row">
+			
+				<div class="col-12">
+					
+					
+					
+					{% if pages|length %}
+					
+						<div class="row">
+							<div class="col-12 text-right mt-5 mb-1">
+								<a href="{{ path('jt_pagecomposer_add') }}" title="Créer une nouvelle page"><div class="btn btn-primary px-5">Créer une page</div></a>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-12 head-list border border-secondary">
+								
+								<div class="row">
+								
+									<div class="font-weight-bold col-9 col-md-5 col-lg-4 border border-secondary border-top-0 border-left-0 text-center border-bottom-0">
+										Titre
+									</div>                                           
+																						
+									<div class="text-center font-weight-bold d-none d-md-block col-12 col-md-3 col-lg-2 border border-secondary border-top-0 border-left-0 border-bottom-0">
+										Créé / Modifié                                  
+									</div>                                              
+																						
+									<div class="text-center font-weight-bold d-none d-lg-block col-lg-2 border border-secondary border-top-0 border-left-0 border-bottom-0">
+										Par                                             
+									</div>    								
+									
+									<div class="text-center font-weight-bold d-none d-md-block col-md-2 border border-secondary border-top-0 border-left-0 border-bottom-0">
+										Publié
+									</div>                                          
+																						
+									<div class="text-center font-weight-bold col-3 col-md-2">
+										Action  
+									</div>	
+									
+								</div>
+								
+							</div>
+						</div>
+						
+						{% for page in pages %}
+							
+							<div class="row item-list">
+							
+								<div class="col-8 col-md-5 col-lg-4 border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-truncate">
+									{{ page.title }}
+								</div>
+								
+								<div class="col-12 col-md-3 col-lg-2 d-none d-md-block border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-center" title="{{ page.updateDate ? ' Maj : '~page.updateDate|date('d/m/Y')~' à '~page.updateDate|date('H:i:s') : 'Créé : '~page.createDate|date('d/m/Y')~' à '~page.createDate|date('H:i:s')  }}">
+									{{ page.updateDate ? ' Maj : '~page.updateDate|date('d M Y') : 'Créé : '~page.createDate|date('d M Y')  }}
+								</div>
+								
+								<div class="col-12 col-md-2 d-none d-lg-block border border-secondary border-right-0 border-left-0 border-top-0 py-2 text-center text-truncate">
+									{{ page.userName }}
+								</div>
+								
+								<div class="text-center col-12 col-md-2 d-none d-md-block border border-secondary border-right-0 border-left-0 border-top-0 py-2">
+									{{ page.published ? 'Oui' : 'Non' }}
+								</div>
+								
+								<div class="text-right col-4 col-md-2 border border-secondary border-right-0 border-left-0 border-top-0 py-1">
+									
+									<a href="{{ path('jt_pagecomposer_edit', {'slug' : page.slug}) }}" title="Modifier la page {{ page.title }}">
+										<div class="btn btn-secondary p-1 px-2"><span class="fa fa-pencil"></span></div>
+									</a>
+									
+									<a href="{{ path('jt_pagecomposer_delete', {'id' : page.id}) }}" title="Suprimer la page {{ page.title }}">
+										<div class="btn btn-secondary p-1 px-2"><span class="fa fa-trash"></span></div>
+									</a>
+								</div>
+							</div>
+							
+						
+						{% endfor %}
+					
+					{% else %}
+					
+						<div class="row">
+							<div class="col-12 text-center mt-5 mb-2">
+								<span class="is-empty">Il est temps de parler de vous.</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 text-center">
+								<a href="{{ path('jt_pagecomposer_add') }}" title="Créer votre première page"><div class="btn btn-primary px-5">Créer votre première page</div></a>
+							</div>
+						</div>
+					
+					{% endif %}
+				</div>
+			
+			</div>
+				
+		</div>	
+
+	</div>
+		
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	
+	<script>
+		var pathLibrary = '{{ path('jt_file_panel') }}';
+	
+		$('.remove').on('click', function(e)
+		{
+			var url = $(this).attr('data-del');
+			
+			$.get(url)
+				.done(function(res)
+					{
+						console.log(res);
+					});
+		});
+
+	</script>
+	
+	<!-- On sent form JS -->
+	<script src="{{ asset('js/pageComposer-on-sent.js') }}"></script>
+	<!-- TinyMCE JS -->
+	<script src="{{ asset('js/pageComposer-tinymce.js') }}"></script>
+
+	<!-- PageComposer JS -->
+	<!-- Action -->
+	<script src="{{ asset('js/pageComposer-remove.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-row-adjust.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block-add.js') }}"></script>
+
+	<script src="{{ asset('js/pageComposer-row.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-column.js') }}"></script>
+	
+	<!-- Edit JS -->
+	<script src="{{ asset('js/pageComposer-edit.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-add-img.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-reset.js') }}"></script>
+	
+	<!-- Initialization for update JS -->
+	<script src="{{ asset('js/pageComposer-init-update.js') }}"></script>
+	
+	<!-- SEO JS -->
+	<script src="{{ asset('js/pageComposer-check-tag.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-info.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-title.js') }}"></script>
+{% endblock %}
+

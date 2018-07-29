@@ -1,0 +1,5 @@
+{% set image = block.contentImg %}
+
+<figure class="m-0">
+	<img width="100%" src="{{ asset('JTFiles/'~image.directory~'/'~image.nameCrypt) }}" alt="{{ image.alt }}" title="{{ image.title }}"/>
+</figure>

@@ -1,0 +1,41 @@
+{% set name = field.slug %}
+{% set label = field.name %}
+{% set value = field.fieldValue %}
+{% set class = field.htmlClass %}
+{% set id = field.htmlId %}
+{% set options = field.fieldOptions %}
+{% set multiple = field.fieldType.type == 'select_multi' ? 'multiple size=3' : '' %}
+{% set required = field.fieldRequired ? 'required' : '' %}
+
+<select name="{{ name }}" id="{{ id }}" {{ multiple }} {{ required }} class="form-control {{ class }}">
+	{% if value %}
+		{% for option in options  %}
+			{% set lab = option.optLabel %}
+			{% set val = option.optValue %}
+			{% if val == value %}
+				<option value="{{ val }}" selected>{{ lab }}</option>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<option value="" selected {% if field.fieldRequired %}disabled{% endif %}>--{{ label }}--</option>
+	{% endif %}
+	{% for option in options  %}
+		{% set lab = option.optLabel %}
+		{% set val = option.optValue %}
+		<option value="{{ val }}">{{ lab }}</option>
+	{% endfor %}
+</select>
+<span class="ast"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+

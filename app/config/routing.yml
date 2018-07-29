@@ -1,0 +1,28 @@
+jt_site_core:
+    resource: "@JTSiteCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jt_menu:
+    resource: "@JTMenuComposerBundle/Resources/config/routing.yml"
+    prefix:   /back/menu
+
+jt_back_core:
+    resource: "@JTBackCoreBundle/Resources/config/routing.yml"
+    prefix:   /back
+
+jt_form:
+    resource: "@JTFormComposerBundle/Resources/config/routing.yml"
+    prefix:   /back/form
+
+jt_gallery:
+    resource: "@JTGaleryBundle/Resources/config/routing.yml"
+    prefix:   /back/gallery
+
+jt_file:
+    resource: "@JTFileBundle/Resources/config/routing.yml"
+    prefix:   /back/file
+
+jt_page:
+    resource: "@JTPageComposerBundle/Resources/config/routing.yml"
+    prefix:   /back/page
+

@@ -1,0 +1,498 @@
+{% extends "JTPageComposerBundle::layout.html.twig" %}
+
+{% block title%}
+	Création de page - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+	
+	<div class="row">
+	
+		<div class="col-12 py-5">
+		
+			<h1 class="mt-5">Laissez libre court à votre imagination.</h1>
+			<h2>Création de page</h2>
+			
+			{{ form_start(form) }}
+					
+				<div class="row">
+					<div class="col-12" id="cpr-errors">				
+					</div>
+				</div>
+				
+				<!-- Auto tag -->
+				{{ form_widget(form.tagAuto, {'attr' : {'class':'hidden'} } ) }}
+				<!-- Keyword -->
+				{{ form_widget(form.keyword, {'attr' : {'class':'hidden'} } ) }}
+				<!-- description -->
+				{{ form_widget(form.description, {'attr' : {'class':'hidden'} } ) }}
+				<!-- Count element -->
+				{{ form_widget(form.countElem, {'attr' : {'class':'hidden'} } ) }}
+				
+				
+				
+				<!-- Submit -->
+				<div class="row page-menu text-center">
+						<div class="col-6 col-md-6">
+							<div class="row d-flex flex-row-reverse">
+								<div class="col-12 col-md-6">
+									<label class="checkbox-inline col-10 col-md-8">
+										{{ form_widget(form.published, {'attr' : {'data-toggle' : 'toggle', 'class' : ''}, 'id' : 'toggleCheck'} ) }}
+									</label>
+								</div>
+								<div class="col-12 p-1 col-md-6">
+									<button id="show-seo" class="btn btn-secondary col-8 col-md-8">Paramètrage SEO</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-6 col-md-6">
+							<div class="row text-center">
+								<div class="col-12 col-md-6 p-1">
+									<button id="preview" class="btn btn-primary col-10 col-md-8">Prévisualier</button>
+								</div>
+								<div class="col-12 col-md-6 p-1">
+									{{ form_widget(form.Enregistrer, {'attr' : {'class':'btn btn-success col-10 col-md-8'} } ) }}
+								</div>
+							</div>						
+						</div>
+				</div>
+				
+				<!-- Page title -->
+				<div class="row">
+					<div class="col-12 form-group">
+						{{ form_label(form.title, 'Titre de la page') }}
+						{{ form_widget(form.title, {'attr' : {'class':'form-control'} } ) }}
+					</div>
+				</div>
+				
+				<!-- Page tag -->
+				<div class="row">
+					<div class="col-12 form-group">
+						{{ form_label(form.tag, 'Tag de recherche') }}
+						{{ form_widget(form.tag, {'attr' : {'class':'form-control'} } ) }}
+					</div>
+				</div>
+				
+				<div class="row">
+					<div id="workspace" class="workspace col-12 p-2 pb-5">
+						<!-- Adding a new row in a composer -->
+						<div class="action-workspace text-center">
+							<div class="btn btn-secondary" id="add-row"><span class="fa fa-plus-circle action"></span></div>
+						</div>
+								
+						{% set countElem = form.vars.value.countElem %}
+						{% set i = 0 %}
+						
+						{% for i in i..countElem %}
+						
+							{{ include('JTPageComposerBundle:composer:tst-row.html.twig',{'from':'base'}) }}
+							
+						{% endfor %}
+						
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-12 hidden">
+						{{ include('JTPageComposerBundle:composer:panelseo.html.twig') }}
+					</div>
+				</div>
+				
+				<div class="hidden">
+					<!-- New row -->
+					<div id="proto-row" data-prototype="{{ form_widget(form.row.vars.prototype)|e }}" class="hidden"></div>
+					{{ form_widget(form.row) }}
+				</div>
+				
+			{{ form_end(form,{'render_rest': true}) }}
+		</div>
+
+	</div>
+	
+	<div class="hidden">
+		{{ include('JTPageComposerBundle:composer:paneloption.html.twig') }}
+		{{ include('JTPageComposerBundle:composer:panelblock.html.twig') }}
+	</div>
+	
+{% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	<script src="{{ asset('js/plugin.composer.js') }}"></script>
+	<script src="{{ asset('js/plugin.ajaxCallHtml.js') }}"></script>
+	
+	<script>
+	
+		/**************
+		
+			MASTER
+		
+		************/
+		var $workspace = '#workspace',
+			$add = '#add-row',
+			itemPrototype = '#new-item',
+			fileInput = '.imgField';
+		
+		
+		var data =
+				{
+					//'workspace' : $workspace,
+					'btnAddDefault' : $add,
+					'prefixeBlock' : 'cpr-',//Prefixe of blocks
+					'prefixeForm' : 'form-',
+					'attrPanelEdit' : 'data-panel',
+					'attrPanelInpTarget' : 'data-target-input',
+					'panelRowInput' : '.form-group',
+					'panelTitle' : 'Paramétrage',
+					'targetPanelTitle' : $modalTitle,
+					'targetPanel' : $modalBody,
+					'showPanel' : function(/*panel*/)/* REQUIRED */
+						{ 
+							$($modal).modal('show'); 
+						},
+					'tinySlector' : '.tinymce',
+					'tinyMCE' : //Add option of tinyMCE or true // Default = false
+						true,//{selector : '.tinymce',... Other TinyMCE options ...},
+					'block' :
+						{
+							'default' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//true Or '.jiti-drag' //Draggable btn action
+									//'drop' : '.cpr-item',//Droppable zone//If is empty = parent
+									//'dragOption' : {},//Optionnal
+									//'dropOption' : {},//Optionnal
+									'html' : function(/*current container*/)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = $('#proto-row').attr('data-prototype');
+											
+											html += '<div class="col-12 cpr-row bg-grey-1 p-2 mb-2">';
+												
+												html += '<div class="nav-action-left">';
+													html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+													html += '<div class="btn-group panel-action">';
+														html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-options"><span class="fa fa-pencil action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+													html += '</div>';
+												html += '</div>';
+												
+												html += '<div class="form-row hidden">';
+													html += form;
+												html += '</div>';
+											html += '</div>';
+									
+											return html;
+										}
+								},
+								'row' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//or true // Draggable btn action
+									//'drop' : '.cpr-item',//Droppable zone//If is empty = parent
+									//'dragOption' : {},//Optionnal
+									//'dropOption' : {},//Optionnal
+									'html' : function(container)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = container.find('.form-row').find('[id$=_column]').attr('data-prototype');
+										
+											html += '<div class="col-md mb-2 cpr-column bg-white p-2">';
+	
+											html += '<div class="nav-action-right">';
+												html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+												html += '<div class="btn-group panel-action">';
+													html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+													html += '<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>';
+													html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-options"><span class="fa fa-pencil action"></span></div>';
+													html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+												html += '</div>';
+											html += '</div>';
+												
+												html += '<div class="form-column hidden">';
+													html += form;
+												html += '</div>';
+												
+											html += '</div>';
+																	
+											return html;
+										}
+								},
+								'column' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//Or true // Draggable btn action
+									'html' : function(container)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = container.find('.form-column').find('[id$=_block]').attr('data-prototype');
+												
+											html += '<div class="col-12 p-1 m-auto cpr-block text-center">';
+		
+												html += '<div class="nav-action-right">';
+													html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+													html += '<div class="btn-group panel-action">';
+														html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-options"><span class="fa fa-pencil action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+													html += '</div>';
+												html += '</div>';
+	
+												html += '<div class="form-block hidden">';
+													html += form;
+												html += '</div>';
+
+												html += '<div class="row">';
+													html += '<div class="col-12 text-center">';
+														html += '<span class="cpr-block-icon"></span>';
+													html += '</div>';
+												html += '</div>';
+													
+												html += '<div class="row">';
+													html += '<div class="col-12 text-center text-capitalize">';
+														html += '<span class="cpr-block-title"></span>';
+													html += '</div>';
+												html += '</div>';
+
+												html += '<div class="row">';
+													html += '<div class="col-12 cpr-block-row">';
+													html += '</div>';
+												html += '</div>';
+
+											html += '</div>';
+																				
+											return html;
+										}
+								}
+						},
+					'event' :
+						{
+							'onAddStart' : function(thisbtn){},//Start of addBlock function
+							'onAdd' : function(newBlock, nameContainer, thisbtn)//Before append and add action //Return newBlock for modif block
+							{
+								if(newBlock.is('.cpr-block'))
+								{
+									console.log(newBlock);
+									showBlockList(newBlock);
+								}
+							},
+							'onAddEnd' : function(newBlock, nameContainer, thisbtn){},//End of addBlock function //Return newBlock for modif block
+							
+							'onEditStart' : function(thisbtn, panelEdit, block){},//Start of editBlock function with panel before modification // return panelEdit for modif panel
+							'onEdit' : function(thisbtn, panelEdit, block)//Panel is refresh // return panelEdit for modif panel
+								{
+									//Show edit panel
+									if(block.is('.cpr-row'))
+									{
+										//Remove nav
+										panelEdit.find('.nav').remove();
+										//Remove edit content
+										panelEdit.find('.panel-content').remove();
+										//Remove edit responsive
+										panelEdit.find('.panel-responsive').remove();
+									}
+									else if(block.is('.cpr-column'))
+									{
+										//Remove btn in nav
+										panelEdit.find('.nav').find('[data-target=".panel-content"]').remove();
+										//Remove edit content
+										panelEdit.find('.panel-content').remove();
+									}
+									else if(block.is('.cpr-block'))
+									{
+										//Remove btn in nav
+										panelEdit.find('.nav').find('[data-target=".panel-responsive"]').remove();
+										//Remove edit responsive
+										panelEdit.find('.panel-responsive').remove();										
+									}
+									
+									//panelEdit.imgAction();
+									//panelEdit.resetAction();
+								},
+							'onEditEnd' : function(thisbtn, panelEdit, block)//End of editBlock function // return panelEdit for modif panel
+								{
+									//Click on first in nav
+									panelEdit.find('.nav nav ul').children('li.page-item').first().trigger('click');
+								},
+							
+							'onRefreshStart' : function(panelEdit, formHiddenBlock){},//On start refresh panel // return formHiddenBlock for modif
+							'onRefreshLoop' : function(inpPanel, inpForm, valForm){},//On load value in panel // Return valForm for modif val
+															
+							'onRefreshForm' : function(inpPanel, inpForm, valPanel)//On change in panel //return valPanel for modif val
+							{
+								if(inpPanel.attr('data-target-input') == 'label')
+								{
+									inpForm.closest('[class*=cpr-]').find('[class*=name-]').first().text(valPanel);
+								}
+							},
+							
+							'onRemove' : function(block, container){},//On remove block // Return container for change remove container
+						}
+				};	
+		
+		$($workspace).JiTiComposer(data);
+			
+		/**********************
+			Add block
+		**********************/
+		//Show panel list block
+		function showBlockList(block)
+		{
+			
+			var htmlBlocksList = $($($blockContainer).html());
+			
+			$($modalTitle).html('Sélection de bloque');
+			$($modalBody).html( htmlBlocksList );
+			$($modal).modal('show');
+			
+			htmlBlocksList.find('.block-select').each(function()
+			{
+				$(this).on('click',function(){addBlockSelected($(this),block);});
+			});
+		}
+		function addBlockSelected($this,block)
+		{
+			var blockId = $this.attr('data-block-id'),
+				blockName = $this.attr('data-block-name'),
+				blockType = $this.attr('data-block-content'),
+				blockIcon = $this.attr('data-block-icon');
+				
+			$($modal).modal('hide');
+			block.find('.form-block').find('select[id$=_block]').val(blockId);
+			
+			if(blockType == 'row')
+			{
+				var row = $(data.block.default.html());
+				block.find('.cpr-block-row').html(row);
+				return true;
+			}
+			
+			block.find('.cpr-block-title').text(blockName);
+			block.find('.cpr-block-icon').addClass(blockIcon);
+			block.attr('data-block-content',blockType);
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		/**********
+			Action for btn image
+			call library html
+		*********/
+		$.fn.imgAction = function()
+		{
+			var $this = $(this),
+				html = '';
+				
+			html += '<button class="btn btn-primary add-img">Sélectionner une image</button>';
+			html += '<button class="btn btn-secondary reset">';
+				html += '<span class="fa fa-ban action"></span>';
+			html += '</button>';
+			
+			$this
+				.find(fileInput)
+				.parent()
+				.append(html);
+			
+			$this
+				.find(fileInput)
+				.attr('type','hidden');
+			
+			$this
+				.find(fileInput)
+				.parent()
+				.find('.add-img')
+				.on('click',function()
+				{
+					callAjaxHtml(
+						{
+							'classOnModal' : 'onModal',
+							'urlCall' : '{{ path("jt_file_panel") }}',
+							'targetHtml' : $modalBody,
+							'action' : function(htmlPage)
+								{
+									htmlPage.actionLibrary($this);
+								},
+							'event' : 
+								{
+									'onCall' : function(htmlPage){
+										var val = $($modalBody).find(fileInput).val();
+										$(htmlPage).find('[data-id-file='+(val ? val : -1)+']').addClass('file-active');
+									}
+								}
+						});
+				});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**********
+			Action for btn image
+			call library html
+		*********/
+		$.fn.actionLibrary = function(panel)
+		{
+			var $this = $(this);
+			
+			$this.find('.file-container').each(function()
+				{
+					$(this).on('click',function(e)
+					{
+						e.preventDefault();
+						
+						var $that = $(this),
+							idFile = $that.attr('data-id-file'),
+							inpPanel = panel.find(fileInput);
+							
+						inpPanel.val(idFile);
+						inpPanel.trigger('change');
+						$this.remove();
+					});
+				});
+		}
+		
+		
+		/**********
+			Reset action
+		**********/
+		$.fn.resetAction = function()
+		{
+			var $this = $(this);
+			
+			$this.find('.reset').each(function()
+				{
+					$(this).on('click',function(e)
+						{
+							e.preventDefault();
+							$(this).parent().find('input,textarea,select').val('');
+							$(this).parent().find('input,textarea,select').trigger('change');
+						});
+				});
+		}
+		
+	</script>
+{% endblock %}
+

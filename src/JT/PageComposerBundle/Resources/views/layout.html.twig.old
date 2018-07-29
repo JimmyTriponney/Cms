@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ include('JTPageComposerBundle:Interface:composer.html.twig') }}
+	<div class="hidden">
+		{{ include('JTPageComposerBundle:Interface:paneloption.html.twig') }}
+	</div>
+	<div class="hidden">
+		{{ include('JTPageComposerBundle:Interface:panelblock.html.twig') }}
+	</div>
+{% endblock %}
+
+{% block javascript %}
+	<script>
+		var pathLibrary = '{{ path('jt_file_panel') }}';
+	</script>
+	<!-- On sent form JS -->
+	<script src="{{ asset('js/pageComposer-on-sent.js') }}"></script>
+	
+	<!-- TinyMCE JS -->
+	<script src="{{ asset('js/pageComposer-tinymce.js') }}"></script>
+	
+	<!-- PageComposer JS -->
+	<!-- Action -->
+	<script src="{{ asset('js/pageComposer-remove.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-row-adjust.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block-add.js') }}"></script>
+	
+	<script src="{{ asset('js/pageComposer-row.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-block.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-column.js') }}"></script>
+	
+	<!-- Edit JS -->
+	<script src="{{ asset('js/pageComposer-edit.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-add-img.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-edit-reset.js') }}"></script>
+	
+	<!-- Initialization for update JS -->
+	<script src="{{ asset('js/pageComposer-init-update.js') }}"></script>
+	
+	<!-- SEO JS -->
+	<script src="{{ asset('js/pageComposer-check-tag.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-info.js') }}"></script>
+	<script src="{{ asset('js/pageComposer-seo-title.js') }}"></script>
+{% endblock %}

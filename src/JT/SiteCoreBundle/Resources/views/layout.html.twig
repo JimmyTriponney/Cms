@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheet %}
+	<!-- Plupload JS -->
+	<script src="{{ asset('vendor/plupload/plupload.full.min.js') }}"></script>
+
+	<link rel="stylesheet" href="{{ asset('css/site/nav.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('css/site/form.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('css/site/content.css') }}"/>
+{% endblock %}
+
+
+{% block nav %}
+	{{ include('JTSiteCoreBundle:Includes:nav.html.twig') }}
+{% endblock %}
+
+{% block javascrypt%}
+
+	<script src="{{ asset('js/file-add.js') }}"></script>
+	<script src="{{ asset('js/file-progress.js') }}"></script>
+	<script src="{{ asset('js/file-drop.js') }}"></script>
+	<script src="{{ asset('js/file-error.js') }}"></script>
+	<script src="{{ asset('js/file-uploaded.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% set contentType = block.block.name %}
+{% set contentText = block.contentText %}
+{% set otherInfo = block.otherInfo %}
+
+{% if contentType|lower == 'header' %}
+	
+	
+	<h{{ otherInfo }} class="col-12" style="text-align:{{ align }}">{{ contentText }}</h{{ otherInfo }}>
+
+
+{% else %}
+
+	{{ dump(contentType) }}
+	
+{% endif %}

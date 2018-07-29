@@ -1,0 +1,68 @@
+{% set name = field.slug %}
+{% set label = field.name %}
+{% set value = field.fieldValue %}
+{% set class = field.htmlClass %}
+{% set id = field.htmlId %}
+{% set required = field.fieldRequired ? 'required' : '' %}
+{% set type = field.fieldType.type %}
+{% set format = field.fieldFormat %}
+
+{% set upContainer = name~'-'~type~'-uploader' %}
+{% set upBrowse = name~'-'~type~'-browse' %}
+{% set upDrop = name~'-'~type~'-drop' %}
+{% set upDirectory = 'Site/' %}
+
+<!-- Add file panel -->
+<h5 class="col-12 text-center">{{ label }}</h5>
+<span class="ast"></span>
+<div class="uploader">
+	<div id="{{ upContainer }}">
+		<div id="{{ upDrop }}" class="upload-droparea">
+			<p>Déposez vos fichiers ici</p>
+			<p>ou</p>
+			<div class="btn btn-secondary" id="{{ upBrowse }}">Cliquez ici pour parcourir</div>
+			<div id="upload-list" class="upload-list"></div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+
+<script>
+
+	var uploader = new plupload.Uploader({
+		runtimes : 'html5,flash',
+		containes : '{{ upContainer }}',
+		browse_button : '{{ upBrowse }}',
+		drop_element : '{{ upDrop }}',
+		chunk_size : '1mb',
+		max_retries : 3,
+		url : '{{ path('jt_file_load') }}',
+		flash_swf_url : '{{ asset('vendor/plupload/moxie.swf') }}',
+		multipart : true,
+		urlstream_upload : true,
+		multipart_params : {
+			directory : '{{ upDirectory }}'
+		},
+		filters : [
+			{title : 'Images', extensions : 'jpg,gif,png'},
+			{title : 'Work' , extensions : 'psd'},
+			{title : 'Movie' , extensions : 'avi,mp4'}
+		]
+	});
+	
+	uploader.init();
+
+
+
+</script>
+
+
+
+
+
+
+
+

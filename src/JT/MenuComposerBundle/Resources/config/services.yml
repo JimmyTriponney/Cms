@@ -1,0 +1,4 @@
+services:
+#    jt_menu_composer.example:
+#        class: JT\MenuComposerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,540 @@
+{% extends 'JTMenuComposerBundle::layout.html.twig' %}
+
+{% block title %}Modification du menu - {{ parent() }}{% endblock %}
+
+{% block page %}
+
+	<style>
+		
+	
+		#workspace-menu
+		{
+			background-color: #ddd;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			min-height: 100px;
+			padding: 10px;
+			padding-bottom: 3em;
+			text-align: center;
+		}
+		
+		#add-item
+		{
+			position: absolute;
+			bottom: 5px;
+		}
+		
+		.cpr-item
+		{
+			background-color : #fff;
+			border : 2px #ccc dashed;
+			border-radius : 5px;
+			padding-top : 50px;
+			min-height : 45px;
+		}
+		
+		.name-item
+		{
+			font-size : 1.5em;
+		}
+		
+		.cpr-dropdown
+		{
+			background-color : #eee;
+			border : 1px #ddd solid;
+			border-radius : 5px;
+			padding-top : 50px;
+			min-height : 45px;
+		}
+		
+		.name-dropdown
+		{
+			font-size : 1.3em;
+		}
+		
+		.cpr-subdropdown
+		{
+			background-color : #fff;
+			border : 1px solid #ddd;
+			border-radius : 5px;
+			padding-top : 50px;
+			min-height : 45px;
+		}
+	</style>
+
+	<div class="row">
+	
+		<div class="col-12 py-5">
+		
+			<h1 class="mt-5">Guider les visiteurs, il vous faudra.</h1>
+			<h2>Modification de menu</h2>
+			
+			<div class="row">
+				<div class="col-12" id="cpr-errors">				
+				</div>
+			</div>
+			{{ form_start(form) }}
+			
+				<!-- New item -->
+				<div id="new-item" data-prototype="{{ form_widget(form.item.vars.prototype)|e }}" class="hidden"></div>
+				
+				
+				
+				<!-- Submit -->
+				<div class="row page-menu text-center">
+					<div class="col-12 col-md-6 ml-auto">
+						<div class="row text-center">
+							<div class="col-12 col-md-6 ml-auto p-1">
+								{{ form_widget(form.Enregistrer, {'attr' : {'class':'btn btn-success col-10 col-md-8'} } ) }}
+							</div>
+						</div>						
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="btn btn-secondary" id="add-item"><span class="fa fa-plus-circle action"></span></div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<div class="row" id="workspace-menu">
+							{% for item in form.item %}
+								<div class="col-12 cpr-item mb-2">
+									<div class="nav-action-left">
+										<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+										<div class="btn-group panel-action">
+											<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>
+											<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>
+											<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>
+											<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>
+										</div>
+									</div>
+									
+									<div class="col-12 pl-5 font-weight-bold text-left">
+										<span class="name-item">{% if item.vars.value.label is defined %}{{ item.vars.value.label }}{% else %}Nouveau{% endif %}</span>
+									</div>
+									
+									{% for dropdown in item.dropdown %}
+																			
+										<div class="col-11 ml-auto mr-3 cpr-dropdown mb-2">
+											<div class="nav-action-right">
+												<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+												<div class="btn-group panel-action">
+													<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>
+													<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>
+													<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>
+													<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>
+												</div>
+											</div>
+											
+											<div class="col-12 text-left">
+												<span class="name-dropdown">{% if dropdown.vars.value.label is defined %}{{ dropdown.vars.value.label }}{% else %}Nouveau{% endif %}</span>
+											</div>
+											
+											{% for subDropdown in dropdown.subDropdown %}
+											
+												<div class="col-11 ml-auto cpr-subdropdown py-2 text-left font-weight-bold">
+													<div class="nav-action-right">
+														<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+														<div class="btn-group panel-action">
+															<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>
+															<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>
+															<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>
+														</div>
+													</div>
+												
+													<div class="hidden form-subdropdown">{{ form_widget(subDropdown) }}</div>
+												
+													- <span class="font-weight-bold name-subdropdown">{% if subDropdown.vars.value.label is defined %}{{ subDropdown.vars.value.label }}{% else %}Nouveau{% endif %}</span>
+												</div>
+											
+											{% endfor %}
+											
+											<div class="hidden form-dropdown">
+												<!-- New subdropdown -->
+												<div id="new-subDropdown" data-prototype="{{ form_widget(dropdown.subDropdown.vars.prototype)|e }}" class="hidden"></div>
+				
+												{{ form_widget(dropdown) }}
+											</div>
+											
+										</div>
+									
+									{% endfor %}
+									
+									<div class="form-item hidden">
+										<!-- New dropdown -->
+										<div id="new-dropdown" data-prototype="{{ form_widget(item.dropdown.vars.prototype)|e }}" class="hidden"></div>
+				
+										{{ form_widget(item) }}
+									</div>
+									
+								</div>
+							{% endfor %}
+							{{ form_widget(form.item,{'attr' : {'class' : 'hidden'} }) }}
+						</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					</div>
+				
+				</div>
+				
+			{{ form_end(form) }}
+				
+		</div>
+		
+		<div id="panel-edit" class="hidden">
+			<div class="container-fluid">
+				
+				<div class="row">
+					<div class="col-12 form-group">
+						<label for="icon">Icon :</label>
+						<input type="text" class="form-control" id="icon" data-target-input="icon"/>
+					</div>
+					<div class="col-12 form-group">
+						<label for="label">Libellé :</label>
+						<input type="text" class="form-control" id="label" data-target-input="label"/>
+					</div>
+					<div class="col-12 form-group">
+						<label for="link">Url :</label>
+						<input type="text" class="form-control" id="link" data-target-input="link"/>
+					</div>
+					<div class="col-12 text-center">OU</div>
+					<div class="col-12 form-group">
+						<label for="page">Page :</label>
+						<select class="form-control" id="page" data-target-input="page"></select>
+					</div>		
+					<div class="col-12 form-group">
+						<label>Image</label>
+						<input type="hidden" class="imgField" id="img" data-target-input="img"/>
+					</div>
+					<div class="col-12 form-group">
+						<label for="description">Description</label>
+						<textarea class="form-control" rows="10" id="description" data-target-input="description"></textarea>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	
+	</div>
+{% endblock %}	
+	
+{% block javascript %}
+
+	{{ parent() }}
+	<script src="{{ asset('js/plugin.composer.js') }}"></script>
+	<script src="{{ asset('js/plugin.ajaxCallHtml.js') }}"></script>
+	<script>
+	
+		/**************
+		
+			MASTER
+		
+		************/
+		var $menuWorkspace = '#workspace-menu',
+			$addItem = '#add-item',
+			itemPrototype = '#new-item',
+			fileInput = '.imgField';
+		
+		
+		var curEdit,
+			data =
+				{
+					//'workspace' : $menuWorkspace,
+					'btnAddDefault' : $addItem,
+					'prefixeBlock' : 'cpr-',//Prefixe of blocks
+					'prefixeForm' : 'form-',
+					'attrPanelEdit' : 'data-panel',
+					'attrPanelInpTarget' : 'data-target-input',
+					'panelRowInput' : '.form-group',
+					'panelTitle' : 'Paramétrage',
+					'targetPanelTitle' : $modalTitle,
+					'targetPanel' : $modalBody,
+					'showPanel' : function(/*panel*/)/* REQUIRED */
+						{ 
+							$($modal).modal('show'); 
+						},
+					'tinySelector' : '.tinymce',
+					'tinyMCE' : //Add option of tinyMCE or true // Default = false
+						true,//{selector : '.tinymce',... Other TinyMCE options ...},
+					'block' :
+						{
+							'default' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//true Or '.jiti-drag' //Draggable btn action
+									//'drop' : '.cpr-item',//Droppable zone//If is empty = parent
+									//'dragOption' : {},//Optionnal
+									//'dropOption' : {},//Optionnal
+									'html' : function(/*current container*/)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = $(itemPrototype).attr('data-prototype');
+									
+											html += '<div class="col-12 cpr-item mb-2">';
+												html += '<div class="nav-action-left">';
+													html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+													html += '<div class="btn-group panel-action">';
+														html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+													html += '</div>';
+												html += '</div>';
+												html += '<div class="form-item hidden">'+form+'</div>';
+												html += '<div class="col-12 pl-5 font-weight-bold text-left">';
+													html += '<span class="name-item">Nouveau</span>';
+												html += '</div>';
+											html += '</div>';
+											
+											return html;
+										}
+								},
+								'item' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//or true // Draggable btn action
+									//'drop' : '.cpr-item',//Droppable zone//If is empty = parent
+									//'dragOption' : {},//Optionnal
+									//'dropOption' : {},//Optionnal
+									'html' : function(container)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = container.find('.form-item').find('[id$=dropdown]').attr('data-prototype');
+										
+											html += '<div class="col-11 ml-auto mr-3 cpr-dropdown mb-2">';
+												html += '<div class="nav-action-right">';
+													html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+													html += '<div class="btn-group panel-action">';
+														html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-add"><span class="fa fa-plus-circle action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+													html += '</div>';
+												html += '</div>';
+												
+												html += '<div class="hidden form-dropdown">'+form+'</div>';
+												
+												html += '<div class="col-12 text-left">';
+													html += '<span class="name-dropdown">Nouveau</span>';
+												html += '</div>';
+											html += '</div>';
+																				
+											return html;
+										}
+								},
+								'dropdown' : //Name of block in class (EX : jiti-name)
+								{
+									//'action' : true,//Active action from plugin //Default = true
+									'add' : '.jiti-add',//Add btn action
+									'edit' : '.jiti-edit',//Edit btn action
+									'remove' : '.jiti-remove',//Remove btn action
+									'drag' : '.jiti-drag',//Or true // Draggable btn action
+									//'drop' : '.cpr-item',//Droppable zone//If is empty = parent
+									//'dragOption' : {},//Optionnal
+									//'dropOption' : {},//Optionnal
+									'html' : function(container)//Arg node target is return from plugin //If no return = no append, but we make it with this function
+										{
+											var html = '',
+												form = container.find('.form-dropdown').find('[id$=subDropdown]').attr('data-prototype');
+												
+											html += '<div class="col-11 ml-auto cpr-subdropdown py-2 text-left font-weight-bold">';
+												html += '<div class="nav-action-right">';
+													html += '<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>';
+													html += '<div class="btn-group panel-action">';
+														html += '<div class="btn btn-secondary jiti-remove"><span class="fa fa-trash action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-edit" data-panel="panel-edit"><span class="fa fa-pencil action"></span></div>';
+														html += '<div class="btn btn-secondary jiti-drag"><span class="fa fa-arrows action"></span></div>';
+													html += '</div>';
+												html += '</div>';
+											
+												html += '<div class="form-subdropdown hidden">'+form+'</div>';
+											
+												html += '- <span class="font-weight-bold name-subdropdown">Nouveau</span>';
+											html += '</div>';
+																				
+											return html;
+										}
+								}
+						},
+					'event' :
+						{
+							'onAddStart' : function(thisbtn){},//Start of addBlock function
+							'onAdd' : function(newBlock, nameContainer, thisbtn){},//Before append and add action //Return newBlock for modif block
+							'onAddEnd' : function(newBlock, nameContainer, thisbtn){},//End of addBlock function //Return newBlock for modif block
+							
+							'onEditStart' : function(thisbtn, panelEdit, block){},//Start of editBlock function with panel before modification // return panelEdit for modif panel
+							'onEdit' : function(thisbtn, panelEdit, block)//Panel is refresh // return panelEdit for modif panel
+								{
+									panelEdit.imgAction();
+									panelEdit.resetAction();
+								},
+							'onEditEnd' : function(thisbtn, panelEdit, block){},//End of editBlock function // return panelEdit for modif panel
+							
+							'onRefreshStart' : function(panelEdit, formHiddenBlock){},//On start refresh panel // return formHiddenBlock for modif
+							'onRefreshLoop' : function(inpPanel, inpForm, valForm){},//On load value in panel // Return valForm for modif val
+															
+							'onRefreshForm' : function(inpPanel, inpForm, valPanel)//On change in panel //return valPanel for modif val
+							{
+								if(inpPanel.attr('data-target-input') == 'label')
+								{
+									inpForm.closest('[class*=cpr-]').find('[class*=name-]').first().text(valPanel);
+								}
+							},
+							
+							'onRemove' : function(block, container){},//On remove block // Return container for change remove container
+						}
+				};	
+		
+		$($menuWorkspace).JiTiComposer(data);
+				
+		var i = 0, x = 0, y = 0;
+				
+		$($menuWorkspace).on('jiti.addStart',function(e)
+		{
+			e.preventDefault();
+			console.log('addBlockStart '+(i++));
+			
+		});
+		
+		
+		
+		/**********
+			Action for btn image
+			call library html
+		*********/
+		$.fn.imgAction = function()
+		{
+			var $this = $(this),
+				html = '';
+				
+			html += '<button class="btn btn-primary add-img">Sélectionner une image</button>';
+			html += '<button class="btn btn-secondary reset">';
+				html += '<span class="fa fa-ban action"></span>';
+			html += '</button>';
+			
+			$this
+				.find(fileInput)
+				.parent()
+				.append(html);
+			
+			$this
+				.find(fileInput)
+				.attr('type','hidden');
+			
+			$this
+				.find(fileInput)
+				.parent()
+				.find('.add-img')
+				.on('click',function()
+				{
+					callAjaxHtml(
+						{
+							'classOnModal' : 'onModal',
+							'urlCall' : '{{ path("jt_file_panel") }}',
+							'targetHtml' : $modalBody,
+							'action' : function(htmlPage)
+								{
+									htmlPage.actionLibrary($this);
+								},
+							'event' : 
+								{
+									'onCall' : function(htmlPage){
+										var val = $($modalBody).find(fileInput).val();
+										$(htmlPage).find('[data-id-file='+(val ? val : -1)+']').addClass('file-active');
+									}
+								}
+						});
+				});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**********
+			Action for btn image
+			call library html
+		*********/
+		$.fn.actionLibrary = function(panel)
+		{
+			var $this = $(this);
+			
+			$this.find('.file-container').each(function()
+				{
+					$(this).on('click',function(e)
+					{
+						e.preventDefault();
+						
+						var $that = $(this),
+							idFile = $that.attr('data-id-file'),
+							inpPanel = panel.find(fileInput);
+							
+						inpPanel.val(idFile);
+						inpPanel.trigger('change');
+						$this.remove();
+					});
+				});
+		}
+		
+		
+		/**********
+			Reset action
+		**********/
+		$.fn.resetAction = function()
+		{
+			var $this = $(this);
+			
+			$this.find('.reset').each(function()
+				{
+					$(this).on('click',function(e)
+						{
+							e.preventDefault();
+							$(this).parent().find('input,textarea,select').val('');
+							$(this).parent().find('input,textarea,select').trigger('change');
+						});
+				});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+	
+{% endblock %}

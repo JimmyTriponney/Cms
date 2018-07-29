@@ -1,0 +1,55 @@
+<div class="container">
+
+	<div class="row">
+	
+		{% for column in row.column %}
+		
+			{% set paddingTop = column.paddingTop ? column.paddingTop~'px' : '0' %}
+			{% set paddingRight = column.paddingRight ? column.paddingRight~'px' : '0' %}
+			{% set paddingBottom = column.paddingBottom ? column.paddingBottom~'px' : '0' %}
+			{% set paddingLeft = column.paddingLeft ? column.paddingLeft~'px' : '0' %}
+			
+			{% set borderSize = column.borderSize ? column.borderSize~'px' : '0' %}
+			{% set borderStyle = column.borderStyle ? column.borderStyle : 'none' %}
+			{% set borderColor = column.borderColor ? column.borderColor : '#000' %}
+			{% set borderRadius = column.borderRadius ? column.borderRadius~'px' : '0' %}
+			
+			{% set colXs = column.colXs ? 'col-'~column.colXs : 'col-12' %}
+			{% set colSm = column.colSm ? ' col-sm-'~column.colSm : '' %}
+			{% set colMd = column.colMd ? ' col-md-'~column.colMd : '' %}
+			{% set colLg = column.colLg ? ' col-lg-'~column.colLg : '' %}
+			
+			{% set id = 'jiti-col-'~column.id %}
+			
+			<style>
+				#{{ id }}
+				{
+					padding : {{ paddingTop~' '~paddingRight~' '~paddingBottom~' '~paddingLeft }};
+					border : {{ borderSize~' '~borderStyle~' '~borderColor }};
+					border-radius : {{ borderRadius }};
+					
+					{% if column.bgImg %}
+						background-image : url('{{ asset('JTFiles/'~column.bgImg.directory~'/'~column.bgImg.nameCrypt) }}');
+						background-size : cover;
+						background-repeat : no-repeat;
+						background-position : 50%;
+					{% elseif column.bgColor %}
+						background-color : {{ column.bgColor }};
+					{% endif %}
+				}
+			</style>
+			
+			<div class="{{ colXs~' '~colSm~' '~colMd~' '~colLg}}" id="{{ id }}">
+				{% for block in column.block %}
+					<div class="row">
+						
+						{{ include('JTSiteCoreBundle:Blocks:block.html.twig', {'block' : block} ) }}
+						
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+		
+	</div>
+
+</div>

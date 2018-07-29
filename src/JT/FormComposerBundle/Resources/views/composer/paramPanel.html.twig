@@ -1,0 +1,100 @@
+<!---------------------
+	Parameter panel
+----------------------->
+<div id="fieldParam" class="hidden">
+	<div class="container-fluid">
+		
+		<!-- Menu design -->
+		<div class="row nav">
+			<div class="col-12">
+				<nav>
+				  <ul class="pagination justify-content-center">
+					<li class="page-item active" data-target=".field-parameters-panel"><a class="page-link" href="#">Options de paramétrages</a></li>
+					<li class="page-item" data-target=".field-conditions-panel"><a class="page-link" href="#">Conditions</a></li>
+				  </ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="row field-parameters-panel">
+			
+			<div class="form-group col-6">
+				<label for="name">Nom :</label>
+				<input type="text" class="form-control" id="name" data-target-input="name"/>
+			</div>
+			
+			<div class="form-group col-6">
+				<label for="slug">Slug :</label>
+				<input type="text" disabled class="form-control" id="slug" data-target-input="slug"/>
+			</div>
+			
+			<div class="form-group col-4">
+				<label for="fieldValue">Valeur par défaut :</label>
+				<input type="text" class="form-control" id="fieldValue" data-target-input="fieldValue"/>
+			</div>
+						
+			<div class="form-group col-4">
+				<label for="fieldFormat">Format de donnée :</label>
+				<select class="form-control" id="fieldFormat" data-target-input="fieldFormat">
+					<option value=""></option>
+					<option value="number">Nombre</option>
+					<option value="mail">Mail [xxx@xxx.xxx]</option>
+					<option value="tel">Téléphone [x10]</option>
+					<option value="mobile">Portable [06|07x8]</option>
+					<option value="notmobile">Non portable [^06|^07x8]</option>
+					<option value="url">URL [Vérifie l'existance du domaine]</option>
+				</select>
+			</div>
+			
+			<div class="col-4 p-4 form-group">
+				<label for="fieldRequired">Requis :</label>
+				<input type="checkbox" id="fieldRequired" data-target-input="fieldRequired"/>
+			</div>
+			
+			<div class="form-group col-4">
+				<label for="htmlId">Id additionnelle :</label>
+				<input type="text" class="form-control" id="htmlId" data-target-input="htmlId"/>
+			</div>
+			
+			<div class="form-group col-4">
+				<label for="htmlClass">Class additionnelle :</label>
+				<input type="text" class="form-control" id="htmlClass" data-target-input="htmlClass"/>
+			</div>
+			
+			<div class="form-group col-4">
+				<label for="colMd">Size (12 max.) :</label>
+				<input type="number" max="12" min="0" class="form-control" id="colMd" data-target-input="colMd"/>
+			</div>
+			
+			<div class="form-group col-12 pt-2 border border-muted border-bottom-0 border-left-0 border-right-0">
+				<button class="btn btn-primary col-12" id="add-option">+ option</button>
+				
+				<div class="cpr-option col-12">
+				</div>
+			</div>
+			
+			
+			
+		</div>
+		
+		<div class="row field-conditions-panel hidden">
+			
+			
+			
+			<div class="form-group col-12 pt-2 border border-muted border-bottom-0 border-left-0 border-right-0">
+				<button class="btn btn-primary col-12" id="add-condition-group">+ Groupe de conditions (OU)</button>
+				<div class="cpr-action-condition form-group col-12">
+					<label for="action">Action :</label>
+					<select id="action" class="form-control">
+						<option value="show">Afficher</option>
+						<option value="hide">Masquer</option>
+						<option value="disable">Désactiver</option>
+					</select>
+				</div>
+				<div class="cpr-condition-group col-12">
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

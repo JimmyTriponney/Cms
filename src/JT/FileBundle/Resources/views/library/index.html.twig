@@ -1,0 +1,15 @@
+{% extends "JTFileBundle::layout.html.twig" %}
+
+
+{% block title%}
+	Librairie - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+		{{ include('JTFileBundle:library:panelContainer.html.twig') }}
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	{{ include('JTFileBundle::js.html.twig') }}
+{% endblock %}

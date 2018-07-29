@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-12">
+
+		<h1>Création de gallerie</h1>
+		<!-- /tlspp/web/JTFiles/Files/landscape-nature-sunset-trees.jpg -->
+
+		{{ form_start(form) }}
+		
+			{{ form_errors(form) }}
+		
+		{{ form_end(form) }}
+		
+		<div id="cpr-galery-container" class="px-3 py-2">
+			<div class="row">
+				
+				<div class="cpr-galery-block col-4 col-md-3">
+					<figure>
+						<img src="/tlspp/web/JTFiles/Files/landscape-nature-sunset-trees.jpg" width="100%"/>
+						<figcaption class="text-center">
+							<p class="galery-title">Une photo de test</p>
+							<p class="galery-content">Une description du lien, car l'image est un bouton.</p>
+						</figcaption>
+					</figure>
+				</div>
+				
+				<div class="cpr-galery-block col-4 col-md-3">
+					<figure>
+						<img src="/tlspp/web/JTFiles/Files/20171116142512448665-macaron+(1).jpg" width="100%"/>
+					</figure>
+				</div>
+				
+				
+				<div class="action p-4 add-action text-center col-4 col-md-3">
+				
+					<p>Ajouter un média</p>
+					<span class="fa fa-plus"></span>
+				
+				</div>
+					
+			</div>
+		</div>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="form-group">
+						<input class="form-control"/>
+					</div>					
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			$(function(){
+				var blockGal = new BlockGalery({'cssForm' : "{{ form.block.vars.id }}"});
+				console.log(blockGal);
+			});
+		</script>
+	
+	</div>	
+</div>	

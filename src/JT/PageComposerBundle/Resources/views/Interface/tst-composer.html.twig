@@ -1,0 +1,29 @@
+ {{ dump('###### Le i avant boucle : '~i) }}
+{% for i in 0..countElem %}
+	
+	{{ dump('i début boucle : '~i) }}
+	
+	{{ dump('countRow : '~countRow) }}
+					
+	{{ dump('#======= i de composer : '~i) }}
+	
+	{% for row in form.row %}
+		{% if row.vars.value.pageOrder == i %}
+			{% set i = i+1 %}
+			{% set countRow = countRow+1 %}
+			
+			
+	
+			{{ include('JTPageComposerBundle:Interface:tst-row.html.twig',{'from' : 'composer'}) }}
+	
+	
+			{{ dump('#==== Fin boucle composer') }}
+	
+		{% endif %}
+	{% endfor %}
+	
+	
+	
+	
+	
+{% endfor %}

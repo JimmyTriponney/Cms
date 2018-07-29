@@ -1,0 +1,34 @@
+{# Search column #}
+	{% for x in 0..row.column|length %}
+		{% for column in row.column %}
+			{% if column.vars.value.pageOrder == counter %}
+				element {{ i }} est une colonne (counter = {{ counter }})</br>
+				{% set counter = counter + 1 %}
+				
+				<div class="col-md-12 mb-2 cpr-column bg-white p-2">
+
+					{# Action menu for column #}
+					<div class="nav-action-right">
+						<div class="btn btn-secondary access"><span class="fa fa-bars action"></span></div>
+						<div class="btn-group panel-action">
+							<div class="btn btn-secondary remove"><span class="fa fa-trash action"></span></div>
+							<div class="btn btn-secondary add-block"><span class="fa fa-plus-circle action"></span></div>
+							<div class="btn btn-secondary edit"><span class="fa fa-pencil action"></span></div>
+							<div class="btn btn-secondary"><span class="fa fa-arrows action"></span></div>
+						</div>
+					</div>
+					
+					{{ include('JTPageComposerBundle:Interface:composer-block.html.twig') }}
+					
+					<div class="form-column hidden">
+						{{ form_widget(column) }}
+						{# widget for prototype #}
+						<div id="{{column.block.vars.id}}" data-prototype="{{ form_widget(column.block.vars.prototype)|e }}" class="hidden"></div>
+					</div>
+
+				</div>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+		
+		

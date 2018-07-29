@@ -1,0 +1,90 @@
+<div class="col-12 m-auto p-3">
+					
+	<div class="row">
+		<div class="col-12 text-center">
+			<h2>Options de contenu</h2>
+		</div>
+	</div>
+	
+	<hr class="m-2">
+	
+	<div class="row">
+	
+		<div class="col-12">
+			
+			<!-- For block inline -->
+			<div class="row">
+				<div class="col-12" id="for-inline">
+					<div class="form-group">
+						<label for="contentText">Votre texte</label>
+						<input type="text" class="form-control" id="contentText" data-target-input="contentText"/>
+					</div>
+					<div class="form-group" id="for-header">
+						<label for="otherInfo">Niveau de titre (o-6)</label>
+						<input type="number" min="1" max="6" class="form-control" id="otherInfo" data-target-input="otherInfo"/>
+					</div>
+				</div>
+			</div>
+			
+			<!-- For block text -->	
+			<div class="row">
+				<div class="col-12" id="for-text">		
+					<div class="form-group">
+						<label for="contentText">Votre texte</label>
+						<textarea class="form-control tinymce" id="contentText" data-target-input="contentText"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<!-- For block image -->	
+			<div class="row">
+				<div class="col-12" id="for-image">		
+					<div class="form-group">
+						<label>Ajouter une image</label>
+						<button class="btn btn-primary add-img" data-target-input="contentImg">Sélectionner une image</button>
+						<button class="btn btn-secondary reset">
+							<span class="fa fa-ban action"></span>
+						</button>
+						<input type="hidden" id="contentImg" data-target-input="contentImg"/>
+					</div>
+				</div>
+			</div>
+			
+			<!-- For block html -->	
+			<div class="row">
+				<div class="col-12" id="for-html">		
+					<div class="form-group">
+						<label for="contentText">Html</label>
+						<textarea class="form-control" id="contentText" data-target-input="contentHtml"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- For form block -->
+			<div class="row">
+				<div class="col-12" id="for-form">
+					<div class="form-group">
+						<label for="formulaire">Class personnalisée</label>
+						<select class="form-control" id="formulaire" data-target-input="form"></select>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- For all block -->
+			<div class="row">
+				<div class="col-12" id="for-all">
+					<div class="form-group">
+						<label for="htmlClass">Class personnalisée</label>
+						<input type="text" class="form-control" id="htmlClass" data-target-input="htmlClass"/>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</div>
+

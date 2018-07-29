@@ -1,0 +1,50 @@
+{% set name = field.slug %}
+{% set label = field.name %}
+{% set value = field.fieldValue %}
+{% set class = field.htmlClass %}
+{% set id = field.htmlId %}
+{% set required = field.fieldRequired ? 'required' : '' %}
+{% set type = field.fieldType.type %}
+{% set format = field.fieldFormat %}
+{% set pattern = '' %}
+
+{% if format == 'tel' or format == 'mobile' or format == 'notmobile'%}
+	
+	{% set type = 'tel' %}
+	
+	{% if format == 'tel' %}
+		{% set pattern = 'pattern=^((\\+\\d{2,3}(\\s|\\.|-|_)?0?\\d+|0\\d+)(\\s|\\.|-|_)?)((\\d{2}(\\s|\\.|-|_)?){4})$' %}
+	{% elseif format == 'mobile' %}
+		{% set pattern = 'pattern=^((\\+\\d{2,3}(\\s|\\.|-|_)?0?(6|7)+|0+(6|7)+)(\\s|\\.|-|_)?)((\\d{2}(\\s|\\.|-|_)?){4})$' %}
+	{% elseif format == 'notmobile' %}
+		{% set pattern = 'pattern=^((\\+\\d{2,3}(\\s|\\.|-|_)?0?[^67]+|0+[^67]+)(\\s|\\.|-|_)?)((\\d{2}(\\s|\\.|-|_)?){4})$' %}
+	{% endif %}
+	
+{% elseif format == 'mail' %}
+
+	{% set type = 'email' %}
+	{% set pattern = 'pattern=^[a-zA-Z0-9_.-]*@[a-zA-Z0-9_.-]*\\.[a-zA-Z]{2,6}$' %}
+	
+{% elseif format == 'url' %}
+
+	{% set type = 'text' %}
+	{# ^((http|https)://)?(www\\.)?([a-zA-Z0-9_.-]*)\\.[a-zA-Z]{2,6}(/[a-zA-Z0-9._/-]*)?$ #}
+	
+	{% set pattern = 'pattern=^((http|https)?://)?(www\\.)?([a-zA-Z0-9_.-]*)\\.[a-zA-Z]{2,6}(/[a-zA-Z0-9._/-]*)?$' %}
+	
+{% elseif format == 'number' %}
+
+	{% set type = 'number' %}
+	{% set pattern = 'pattern=^\\d*$' %}
+	
+{% endif %}
+
+<input type="{{ type }}" name="{{ name }}" {{ pattern }} value="{{ value }}" id="{{ id }}" {{ required }} placeholder="{{ label }}" class="form-control {{ class }}"/>
+<span class="ast"></span>
+
+
+
+
+
+
+

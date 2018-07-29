@@ -1,0 +1,114 @@
+{% extends "JTFormComposerBundle::layout.html.twig" %}
+
+{% block title%}
+	Création de formulaire - {{ parent() }}
+{% endblock %}
+
+{% block page %}
+
+	<div class="row">
+		<div class="col-12 py-5">
+
+			<div class="row mt-5">
+				<div class="col-12">
+					<h1>Osez poser la question</h1>
+					<h2>Création de formulaire</h2>
+				</div>
+			</div>
+
+			{{ form_start(form) }}
+				
+				<div class="row">
+					<div class="col-12" id="cpr-errors">
+						{{ form_errors(form) }}					
+					</div>
+				</div>
+			
+				<!-- Submit -->
+					<div class="row page-menu text-center">
+						<div class="col-6">
+							<div class="row">
+								<div class="col-12 p-1 col-md-6">
+									<button id="show-response" class="btn btn-secondary col-8 col-md-8">Réponses</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-6 p-1">
+									<button id="preview" class="btn btn-primary col-10 col-md-8">Prévisualier</button>
+								</div>
+								<div class="col-6 p-1">
+									{{ form_widget(form.Enregistrer, {'attr' : {'class':'btn btn-success col-10 col-md-8'} } ) }}
+								</div>
+							</div>						
+						</div>
+					</div>
+
+				<div class="row">
+					<div class="form-group col-12">
+						<label>Nom du formulaire : </label>
+						{{ form_widget(form.name,{'attr' : {'class' : 'form-control'}}) }}
+					</div>
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="btn btn-secondary" id="add-field"><span class="fa fa-plus-circle action"></span></div>
+						<div id="form-container" class="row">
+							
+							{{ include('JTFormComposerBundle:composer:field.html.twig') }}
+						
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="hidden">
+					
+					<!-- New filed -->
+					<div id="{{form.fields.vars.id}}" data-prototype="{{ form_widget(form.fields.vars.prototype)|e }}">fields</div>
+					<!-- New response -->
+					<div id="{{form.response.vars.id}}" data-prototype="{{ form_widget(form.response.vars.prototype)|e }}">response</div>
+					
+					<div id="response-container">
+						{% set x = 1 %}
+						{% for response in form.response %}
+							<div id="form-response-{{ x }}">
+								{{ form_widget(response) }}
+							</div>
+							{% set x = x+1 %}
+						{% endfor %}
+					</div>
+					{{ form_row(form.countElem) }}
+					{{ form_widget(form.fields) }}
+					{{ form_widget(form.response) }}
+				</div>
+				
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+
+	{{ include('JTFormComposerBundle:composer:responsePanel.html.twig') }}
+	{{ include('JTFormComposerBundle:composer:responseFormPanel.html.twig') }}
+	{{ include('JTFormComposerBundle:composer:paramPanel.html.twig') }}
+	{{ include('JTFormComposerBundle:composer:fieldListPanel.html.twig') }}
+
+{% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	<script src="{{ asset('js/cpr-form-master.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-edit-field.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-add-option.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-add-condition.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-add-condition-group.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-add-field.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-add-rep.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-on-sent.js') }}"></script>
+	<script src="{{ asset('js/cpr-form-init.js') }}"></script>
+{% endblock %}
